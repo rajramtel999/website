@@ -20,55 +20,157 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="manifest" href="manifest.json">
+    
 </head>
-<body>
+<body class="dark-mode">
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <input type="checkbox" id="darkModeToggle" checked>
+        <label for="darkModeToggle">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+            <span class="toggle-ball"></span>
+        </label>
+    </div>
+
+    <!-- Particle JS Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
     <div class="container">
-        <!-- Header Section -->
-        <header>
-            <h1 class="logo" onclick="window.location='https://www.khemrajramtel.com.np';"><img src="logo.png" alt="Logo" height="35px"></h1>
+        <!-- Header -->
+        <header class="fade-in">
+            <a href="https://www.khemrajramtel.com.np" class="logo">
+                <img src="logo.png" alt="Khem Raj Ramtel Logo">
+                <span>Khem Raj Ramtel</span>
+            </a>
             <nav>
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
                 <a href="#contact">Contact</a>
             </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </header>
 
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero fade-in delay-1">
             <div class="hero-content">
-                <h1 class="glow">We're Almost There!</h1>
-                <p class="subtext">Our website is under construction, but we're working hard to bring you something amazing. Stay tuned!</p>
-                <div class="progress-bar">
-                    <div class="progress"></div>
+                <h1>We're Crafting Something Amazing!</h1>
+                <p class="subtext">Our website is under construction, but we're working tirelessly to bring you an exceptional experience. Stay tuned for the grand reveal!</p>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown fade-in delay-2">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
                 </div>
-                <p class="progress-text">Launch Progress: 85%</p>
+                
+                <!-- Progress Bar -->
+                <div class="progress-section fade-in delay-3">
+                    <div class="progress-info">
+                        <span>Development Progress</span>
+                        <span>85% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Notify Me Section -->
-        <section class="notify-section">
-            <h2>Notify Me When It's Ready</h2>
+        <!-- Features Section -->
+        <section id="features" class="features-section fade-in delay-4">
+            <h2 class="section-title">What's Coming</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-desc">Optimized for speed with cutting-edge technology to deliver instant loading times.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Fully Responsive</h3>
+                    <p class="feature-desc">Perfectly adapted for all devices from desktop to mobile with seamless UX.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="feature-title">Secure & Private</h3>
+                    <p class="feature-desc">Enterprise-grade security to protect your data and ensure complete privacy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notify Section -->
+        <section id="contact" class="notify-section fade-in delay-5">
+            <h2>Get Notified When We Launch</h2>
+            <p class="notify-subtext">Join our mailing list to be the first to know when we go live and receive exclusive early access.</p>
             <form class="notify-form">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">Notify Me</button>
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Notify Me <i class="fas fa-paper-plane"></i></button>
             </form>
         </section>
 
-        <!-- Social Media Section -->
+        <!-- Social Section -->
         <section class="social-section">
-            <h2>Follow Us</h2>
+            <h2>Connect With Us</h2>
+            <p class="social-subtext">Follow our journey on social media for updates and behind-the-scenes content.</p>
             <div class="social-links">
-                <a href="https://facebook.com/rajramtel999" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/rajramtel999" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com/rajramtel999" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="https://linkedin.com/in/rajramtel999" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://facebook.com/rajramtel999" target="_blank" class="social-link facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/rajramtel999" target="_blank" class="social-link twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/rajramtel999" target="_blank" class="social-link instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/in/rajramtel999" target="_blank" class="social-link linkedin">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/rajramtel999" target="_blank" class="social-link github">
+                    <i class="fab fa-github"></i>
+                </a>
             </div>
         </section>
 
         <!-- Footer -->
         <footer>
+            <a href="#" class="back-to-top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
             <p>© 2025 Khem Raj Ramtel. All Rights Reserved.</p>
         </footer>
     </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
