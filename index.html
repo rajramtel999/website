@@ -30,25 +30,24 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body class="dark-mode">
-    <!-- 3D Animated Background -->
+    <!-- 3D Background -->
     <canvas id="threejs-background"></canvas>
     
-    <!-- Floating Glass Morphism Elements -->
+    <!-- Glass Elements -->
     <div class="glass-elements">
         <div class="glass-element g1"></div>
         <div class="glass-element g2"></div>
         <div class="glass-element g3"></div>
     </div>
 
-    <!-- Animated Cursor -->
+    <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
 
     <!-- Main Container -->
     <div class="container">
-        <!-- Header with Animated Logo -->
+        <!-- Header -->
         <header class="header">
             <a href="https://www.khemrajramtel.com.np" class="logo-container" id="logoLink">
-                <!-- Your PNG logo -->
                 <img src="logo.png" alt="Khem Raj Ramtel Logo" class="logo-image">
                 <span class="logo-text">Khem Raj Ramtel</span>
             </a>
@@ -67,7 +66,7 @@
             </button>
         </header>
 
-        <!-- Hero Section with 3D Typography Effect -->
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -78,7 +77,7 @@
                 
                 <p class="hero-subtext">My portfolio is under construction, but something extraordinary is coming soon. Stay tuned for the reveal!</p>
                 
-                <!-- Interactive Countdown with SVG Animation -->
+                <!-- Countdown Timer -->
                 <div class="countdown-container">
                     <div class="countdown-svg">
                         <svg viewBox="0 0 100 100">
@@ -118,7 +117,7 @@
                     </div>
                 </div>
                 
-                <!-- Animated Progress Bar with Tooltip -->
+                <!-- Progress Bar -->
                 <div class="progress-section">
                     <div class="progress-header">
                         <span>Development Progress</span>
@@ -139,7 +138,7 @@
             </div>
         </section>
 
-        <!-- Features Section with Interactive Cards -->
+        <!-- Features Section -->
         <section id="features" class="features-section">
             <h2 class="section-title">
                 <span class="title-decorator"></span>
@@ -180,7 +179,7 @@
             </div>
         </section>
 
-        <!-- Contact Section with Animated Form -->
+        <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="contact-container">
                 <div class="contact-info">
@@ -192,7 +191,7 @@
                             <i class="fas fa-envelope"></i>
                             <span>contact@khemrajramtel.com.np</span>
                         </a>
-                        <a href="tel:+1234567890" class="contact-method">
+                        <a href="tel:+9779861457788" class="contact-method">
                             <i class="fas fa-phone"></i>
                             <span>+977 9861457788</span>
                         </a>
@@ -223,7 +222,7 @@
             </div>
         </section>
 
-        <!-- Social Media Section with Animated Links -->
+        <!-- Social Media Section -->
         <section class="social-section">
             <h2 class="social-title">Follow the Journey</h2>
             <p class="social-subtext">Connect with me on social media for updates and behind-the-scenes content.</p>
@@ -252,7 +251,7 @@
             </div>
         </section>
 
-        <!-- Footer with Animated Signature -->
+        <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
                 <div class="signature">
@@ -268,7 +267,7 @@
         </footer>
     </div>
 
-    <!-- Theme Toggle Button -->
+    <!-- Theme Toggle -->
     <button class="theme-toggle" aria-label="Toggle theme">
         <div class="theme-toggle-inner">
             <i class="fas fa-sun"></i>
@@ -288,201 +287,214 @@
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Remove loader when page is loaded
-        const pageLoader = document.querySelector('.page-loader');
-        setTimeout(() => {
-            pageLoader.style.opacity = '0';
-            setTimeout(() => {
-                pageLoader.style.display = 'none';
-            }, 500);
-        }, 1000);
 
-        // Initialize 3D background
-        const initThreeJSBackground = () => {
-            const canvas = document.getElementById('threejs-background');
-            const renderer = new THREE.WebGLRenderer({
-                canvas,
-                alpha: true,
-                antialias: true
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    // Remove loader when page is loaded
+    const pageLoader = document.querySelector('.page-loader');
+    setTimeout(() => {
+        pageLoader.style.opacity = '0';
+        setTimeout(() => {
+            pageLoader.style.display = 'none';
+        }, 500);
+    }, 1000);
+
+    // Initialize 3D background
+    const initThreeJSBackground = () => {
+        const canvas = document.getElementById('threejs-background');
+        if (!canvas) return;
+        
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true,
+            antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particleCount = 500;
+        
+        const posArray = new Float32Array(particleCount * 3);
+        for(let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0x00ffcc,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        // Animation loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.x += 0.0005;
+            particlesMesh.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        };
+        animate();
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
-            
-            // Create particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particleCount = 500;
-            
-            const posArray = new Float32Array(particleCount * 3);
-            for(let i = 0; i < particleCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 10;
-            }
-            
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.02,
-                color: 0x00ffcc,
-                transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending
-            });
-            
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-            
-            // Animation loop
-            const animate = () => {
-                requestAnimationFrame(animate);
-                particlesMesh.rotation.x += 0.0005;
-                particlesMesh.rotation.y += 0.0005;
-                renderer.render(scene, camera);
-            };
-            animate();
-            
-            // Handle resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        };
+        });
+    };
+    
+    // Initialize custom cursor
+    const initCustomCursor = () => {
+        const cursor = document.querySelector('.custom-cursor');
+        if (!cursor) return;
         
-        // Initialize custom cursor
-        const initCustomCursor = () => {
-            const cursor = document.querySelector('.custom-cursor');
-            const links = document.querySelectorAll('a, button, .feature-card');
-            
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-            
-            links.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    cursor.classList.add('cursor-hover');
-                });
-                link.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('cursor-hover');
-                });
-            });
-        };
+        const links = document.querySelectorAll('a, button, .feature-card');
         
-        // Initialize countdown timer
-        const initCountdown = () => {
-            const countdownDate = new Date();
-            countdownDate.setDate(countdownDate.getDate() + 14); // 14 days from now
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('cursor-hover');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('cursor-hover');
+            });
+        });
+    };
+    
+    // Initialize countdown timer
+    const initCountdown = () => {
+        const countdownDate = new Date();
+        countdownDate.setDate(countdownDate.getDate() + 14); // 14 days from now
+        
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
             
-            const updateCountdown = () => {
-                const now = new Date().getTime();
-                const distance = countdownDate - now;
-                
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-                
-                // Update SVG circle animation
-                const circles = document.querySelectorAll('.countdown-circle');
-                const totalDuration = 14 * 24 * 60 * 60 * 1000; // Total duration in ms
-                const remaining = distance;
-                const elapsed = totalDuration - remaining;
-                
-                // Days circle (full rotation in 14 days)
-                const dayPercentage = (elapsed % (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000);
-                circles[0].style.strokeDashoffset = 283 * (1 - dayPercentage);
-                
-                // Hours circle (full rotation in 24 hours)
-                const hourPercentage = (elapsed % (60 * 60 * 1000)) / (60 * 60 * 1000);
-                circles[1].style.strokeDashoffset = 283 * (1 - hourPercentage);
-                
-                // Minutes circle (full rotation in 60 minutes)
-                const minutePercentage = (elapsed % (60 * 1000)) / (60 * 1000);
-                circles[2].style.strokeDashoffset = 283 * (1 - minutePercentage);
-                
-                // Seconds circle (full rotation in 60 seconds)
-                const secondPercentage = (elapsed % 1000) / 1000;
-                circles[3].style.strokeDashoffset = 283 * (1 - secondPercentage);
-                
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    document.querySelector('.countdown-container').innerHTML = '<div class="launch-message">Website Launched!</div>';
-                }
-            };
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            // Initialize circles
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // Update SVG circle animation
             const circles = document.querySelectorAll('.countdown-circle');
-            circles.forEach(circle => {
-                circle.style.strokeDasharray = '283';
-                circle.style.strokeDashoffset = '283';
-            });
+            const totalDuration = 14 * 24 * 60 * 60 * 1000; // Total duration in ms
+            const remaining = distance;
+            const elapsed = totalDuration - remaining;
             
-            updateCountdown();
-            const countdownInterval = setInterval(updateCountdown, 1000);
-        };
-        
-        // Initialize theme toggle
-        const initThemeToggle = () => {
-            const themeToggle = document.querySelector('.theme-toggle');
-            const body = document.body;
+            // Days circle (full rotation in 14 days)
+            const dayPercentage = (elapsed % (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000);
+            if (circles[0]) circles[0].style.strokeDashoffset = 283 * (1 - dayPercentage);
             
-            // Check for saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-            }
+            // Hours circle (full rotation in 24 hours)
+            const hourPercentage = (elapsed % (60 * 60 * 1000)) / (60 * 60 * 1000);
+            if (circles[1]) circles[1].style.strokeDashoffset = 283 * (1 - hourPercentage);
             
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark-mode');
-                body.classList.toggle('light-mode');
-                
-                const isLight = body.classList.contains('light-mode');
-                localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            });
-        };
-        
-        // Initialize form animation
-        const initFormAnimation = () => {
-            const formGroups = document.querySelectorAll('.form-group');
+            // Minutes circle (full rotation in 60 minutes)
+            const minutePercentage = (elapsed % (60 * 1000)) / (60 * 1000);
+            if (circles[2]) circles[2].style.strokeDashoffset = 283 * (1 - minutePercentage);
             
-            formGroups.forEach(group => {
-                const input = group.querySelector('input, textarea');
-                const label = group.querySelector('label');
-                const underline = group.querySelector('.form-underline');
-                
-                input.addEventListener('focus', () => {
-                    label.classList.add('active');
-                    underline.style.transform = 'scaleX(1)';
-                });
-                
-                input.addEventListener('blur', () => {
-                    if (!input.value) {
-                        label.classList.remove('active');
-                    }
-                    underline.style.transform = 'scaleX(0)';
-                });
-                
-                // Check if there's pre-filled content
-                if (input.value) {
-                    label.classList.add('active');
+            // Seconds circle (full rotation in 60 seconds)
+            const secondPercentage = (elapsed % 1000) / 1000;
+            if (circles[3]) circles[3].style.strokeDashoffset = 283 * (1 - secondPercentage);
+            
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                const countdownContainer = document.querySelector('.countdown-container');
+                if (countdownContainer) {
+                    countdownContainer.innerHTML = '<div class="launch-message">Website Launched!</div>';
                 }
+            }
+        };
+        
+        // Initialize circles
+        const circles = document.querySelectorAll('.countdown-circle');
+        circles.forEach(circle => {
+            circle.style.strokeDasharray = '283';
+            circle.style.strokeDashoffset = '283';
+        });
+        
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    };
+    
+    // Initialize theme toggle
+    const initThemeToggle = () => {
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (!themeToggle) return;
+        
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            
+            const isLight = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    };
+    
+    // Initialize form animation
+    const initFormAnimation = () => {
+        const formGroups = document.querySelectorAll('.form-group');
+        
+        formGroups.forEach(group => {
+            const input = group.querySelector('input, textarea');
+            const label = group.querySelector('label');
+            const underline = group.querySelector('.form-underline');
+            
+            if (!input || !label || !underline) return;
+            
+            input.addEventListener('focus', () => {
+                label.classList.add('active');
+                underline.style.transform = 'scaleX(1)';
             });
             
-            // Form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const submitBtn = contactForm.querySelector('.submit-btn');
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    label.classList.remove('active');
+                }
+                underline.style.transform = 'scaleX(0)';
+            });
+            
+            // Check if there's pre-filled content
+            if (input.value) {
+                label.classList.add('active');
+            }
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                if (submitBtn) {
                     submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent';
                     submitBtn.classList.add('success');
                     
@@ -494,193 +506,195 @@
                             label.classList.remove('active');
                         });
                     }, 3000);
-                });
-            }
-        };
-        
-        // Initialize scroll animations
-        const initScrollAnimations = () => {
-            const animateOnScroll = () => {
-                const elements = document.querySelectorAll('.fade-in, .slide-in');
-                elements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementTop < windowHeight - 100) {
-                        element.classList.add('visible');
-                    }
-                });
-            };
-            
-            window.addEventListener('scroll', animateOnScroll);
-            animateOnScroll(); // Run once on load
-        };
-        
-        // Initialize mobile menu
-        const initMobileMenu = () => {
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            menuBtn.addEventListener('click', () => {
-                menuBtn.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-            
-            // Close menu when clicking on a link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    menuBtn.classList.remove('active');
-                    navMenu.classList.remove('active');
-                });
-            });
-        };
-        
-        // Initialize navigation indicator
-        const initNavIndicator = () => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const navIndicator = document.querySelector('.nav-indicator');
-            
-            function setIndicator(el) {
-                navIndicator.style.width = `${el.offsetWidth}px`;
-                navIndicator.style.left = `${el.offsetLeft}px`;
-                navIndicator.style.backgroundColor = getComputedStyle(el).color;
-            }
-            
-            navLinks.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    setIndicator(link);
-                });
-                
-                link.addEventListener('click', () => {
-                    setIndicator(link);
-                });
-            });
-            
-            // Set initial position
-            if (navLinks.length > 0) {
-                setIndicator(navLinks[0]);
-            }
-        };
-        
-        // Initialize current year in footer
-        const initCurrentYear = () => {
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        };
-        
-        // Initialize back to top button
-        const initBackToTop = () => {
-            const backToTopBtn = document.querySelector('.back-to-top');
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
                 }
             });
-            
-            backToTopBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+        }
+    };
+    
+    // Initialize scroll animations
+    const initScrollAnimations = () => {
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in, .slide-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
             });
         };
         
-        // Initialize all functions
-        const init = () => {
-            initThreeJSBackground();
-            initCustomCursor();
-            initCountdown();
-            initThemeToggle();
-            initFormAnimation();
-            initScrollAnimations();
-            initMobileMenu();
-            initNavIndicator();
-            initCurrentYear();
-            initBackToTop();
-            
-            // Animate logo on load
-            const logoPath = document.querySelector('.logo-path');
-            const logoCircle = document.querySelector('.logo-circle');
-            if (logoPath && logoCircle) {
-                setTimeout(() => {
-                    logoPath.style.strokeDashoffset = '0';
-                    logoCircle.style.strokeDashoffset = '0';
-                }, 500);
-                
-                logoPath.style.strokeDasharray = '100';
-                logoPath.style.strokeDashoffset = '100';
-                logoCircle.style.strokeDasharray = '100';
-                logoCircle.style.strokeDashoffset = '100';
-                logoPath.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
-                logoCircle.style.transition = 'stroke-dashoffset 1.5s ease-in-out 0.5s';
-            }
-            
-            // Animate signature in footer
-            const signaturePath = document.querySelector('.signature-path');
-            if (signaturePath) {
-                signaturePath.style.strokeDasharray = '500';
-                signaturePath.style.strokeDashoffset = '500';
-                setTimeout(() => {
-                    signaturePath.style.transition = 'stroke-dashoffset 2s ease-in-out';
-                    signaturePath.style.strokeDashoffset = '0';
-                }, 2000);
-            }
-        };
-        // Logo click animation and functionality
-const logoLink = document.getElementById('logoLink');
-const logoImage = document.querySelector('.logo-image');
-const logoText = document.querySelector('.logo-text');
-
-// Add loaded class after page load
-window.addEventListener('load', () => {
-    logoLink.classList.add('loaded');
-});
-
-// Click animation and navigation
-logoLink.addEventListener('click', function(e) {
-    e.preventDefault();
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run once on load
+    };
     
-    // Click animation
-    logoImage.style.transform = 'scale(0.8) rotate(-20deg)';
-    logoText.style.transform = 'translateX(5px) scale(0.95)';
-    logoText.style.opacity = '0.8';
-    
-    // Add ripple effect
-    const ripple = document.createElement('span');
-    ripple.classList.add('ripple-effect');
-    ripple.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
-    ripple.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
-    this.appendChild(ripple);
-    
-    // Remove ripple after animation
-    setTimeout(() => {
-        ripple.remove();
-    }, 1000);
-    
-    // Navigate after animation
-    setTimeout(() => {
-        window.location.href = this.href;
-    }, 300);
-});
-
-// Hover effects
-logoLink.addEventListener('mouseenter', () => {
-    logoImage.style.transform = 'rotate(15deg) scale(1.1)';
-    logoText.style.transform = 'translateX(5px)';
-});
-
-logoLink.addEventListener('mouseleave', () => {
-    logoImage.style.transform = 'rotate(0) scale(1)';
-    logoText.style.transform = 'translateX(0)';
-    logoText.style.opacity = '1';
-});
+    // Initialize mobile menu
+    const initMobileMenu = () => {
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
         
-        // Start initialization
-        init();
-    });
+        if (!menuBtn || !navMenu) return;
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    };
+    
+    // Initialize navigation indicator
+    const initNavIndicator = () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navIndicator = document.querySelector('.nav-indicator');
+        
+        if (!navLinks.length || !navIndicator) return;
+        
+        function setIndicator(el) {
+            navIndicator.style.width = `${el.offsetWidth}px`;
+            navIndicator.style.left = `${el.offsetLeft}px`;
+            navIndicator.style.backgroundColor = getComputedStyle(el).color;
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                setIndicator(link);
+            });
+            
+            link.addEventListener('click', () => {
+                setIndicator(link);
+            });
+        });
+        
+        // Set initial position
+        if (navLinks.length > 0) {
+            setIndicator(navLinks[0]);
+        }
+    };
+    
+    // Initialize current year in footer
+    const initCurrentYear = () => {
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+    };
+    
+    // Initialize back to top button
+    const initBackToTop = () => {
+        const backToTopBtn = document.querySelector('.back-to-top');
+        if (!backToTopBtn) return;
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    };
+
+    // Logo click animation and functionality
+    const initLogoAnimation = () => {
+        const logoLink = document.getElementById('logoLink');
+        if (!logoLink) return;
+        
+        const logoImage = document.querySelector('.logo-image');
+        const logoText = document.querySelector('.logo-text');
+        
+        // Add loaded class after page load
+        window.addEventListener('load', () => {
+            logoLink.classList.add('loaded');
+        });
+        
+        // Click animation and navigation
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Click animation
+            if (logoImage) logoImage.style.transform = 'scale(0.8) rotate(-20deg)';
+            if (logoText) {
+                logoText.style.transform = 'translateX(5px) scale(0.95)';
+                logoText.style.opacity = '0.8';
+            }
+            
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            ripple.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
+            ripple.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
+            this.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+            
+            // Navigate after animation
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 300);
+        });
+        
+        // Hover effects
+        logoLink.addEventListener('mouseenter', () => {
+            if (logoImage) logoImage.style.transform = 'rotate(15deg) scale(1.1)';
+            if (logoText) logoText.style.transform = 'translateX(5px)';
+        });
+        
+        logoLink.addEventListener('mouseleave', () => {
+            if (logoImage) logoImage.style.transform = 'rotate(0) scale(1)';
+            if (logoText) {
+                logoText.style.transform = 'translateX(0)';
+                logoText.style.opacity = '1';
+            }
+        });
+    };
+    
+    // Initialize all functions
+    const init = () => {
+        initThreeJSBackground();
+        initCustomCursor();
+        initCountdown();
+        initThemeToggle();
+        initFormAnimation();
+        initScrollAnimations();
+        initMobileMenu();
+        initNavIndicator();
+        initCurrentYear();
+        initBackToTop();
+        initLogoAnimation();
+        
+        // Animate signature in footer
+        const signaturePath = document.querySelector('.signature-path');
+        if (signaturePath) {
+            signaturePath.style.strokeDasharray = '500';
+            signaturePath.style.strokeDashoffset = '500';
+            setTimeout(() => {
+                signaturePath.style.transition = 'stroke-dashoffset 2s ease-in-out';
+                signaturePath.style.strokeDashoffset = '0';
+            }, 2000);
+        }
+    };
+    
+    // Start initialization
+    init();
+});
     </script>
 </body>
 </html>
