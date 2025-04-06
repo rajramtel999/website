@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Our website is under construction, but we're working hard to bring you something amazing. Stay tuned!">
-    <meta name="application-name" content="Khem Raj Ramtel">
-    <meta name="apple-mobile-web-app-title" content="Khem Raj Ramtel">
+    <meta name="description" content="Khem Raj Ramtel's website is under construction with exciting features coming soon. Stay tuned for the launch!">
+    <meta name="keywords" content="Khem Raj Ramtel, portfolio, coming soon, under construction">
+    <meta name="author" content="Khem Raj Ramtel">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:title" content="Khem Raj Ramtel - Coming Soon">
+    <meta property="og:description" content="My website is under construction with exciting features coming soon.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.khemrajramtel.com.np">
     <title>Khem Raj Ramtel</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
@@ -20,157 +28,659 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="manifest" href="manifest.json">
-    
 </head>
 <body class="dark-mode">
-    <!-- Dark Mode Toggle -->
-    <div class="dark-mode-toggle">
-        <input type="checkbox" id="darkModeToggle" checked>
-        <label for="darkModeToggle">
-            <i class="fas fa-moon"></i>
-            <i class="fas fa-sun"></i>
-            <span class="toggle-ball"></span>
-        </label>
-    </div>
-
-    <!-- Particle JS Background -->
-    <div id="particles-js"></div>
+    <!-- 3D Animated Background -->
+    <canvas id="threejs-background"></canvas>
     
-    <!-- Floating Elements -->
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
+    <!-- Floating Glass Morphism Elements -->
+    <div class="glass-elements">
+        <div class="glass-element g1"></div>
+        <div class="glass-element g2"></div>
+        <div class="glass-element g3"></div>
     </div>
 
+    <!-- Animated Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Main Container -->
     <div class="container">
-        <!-- Header -->
-        <header class="fade-in">
-            <a href="https://www.khemrajramtel.com.np" class="logo">
-                <img src="logo.png" alt="Khem Raj Ramtel Logo">
-                <span>Khem Raj Ramtel</span>
+        <!-- Header with Animated Logo -->
+        <header class="header">
+            <a href="https://www.khemrajramtel.com.np" class="logo-container" id="logoLink">
+                <!-- Your PNG logo -->
+                <img src="logo.png" alt="Khem Raj Ramtel Logo" class="logo-image">
+                <span class="logo-text">Khem Raj Ramtel</span>
             </a>
-            <nav>
-                <a href="#about">About</a>
-                <a href="#features">Features</a>
-                <a href="#contact">Contact</a>
+            
+            <nav class="nav-menu">
+                <a href="#about" class="nav-link hover-underline">About</a>
+                <a href="#features" class="nav-link hover-underline">Features</a>
+                <a href="#contact" class="nav-link hover-underline">Contact</a>
+                <div class="nav-indicator"></div>
             </nav>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
             </button>
         </header>
 
-        <!-- Hero Section -->
-        <section class="hero fade-in delay-1">
+        <!-- Hero Section with 3D Typography Effect -->
+        <section class="hero">
             <div class="hero-content">
-                <h1>We're Crafting Something Amazing!</h1>
-                <p class="subtext">Our website is under construction, but we're working tirelessly to bring you an exceptional experience. Stay tuned for the grand reveal!</p>
+                <h1 class="hero-title">
+                    <span class="title-word title-word-1">Crafting</span>
+                    <span class="title-word title-word-2">Digital</span>
+                    <span class="title-word title-word-3">Experiences</span>
+                </h1>
                 
-                <!-- Countdown Timer -->
-                <div class="countdown fade-in delay-2">
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="days">00</div>
-                        <div class="countdown-label">Days</div>
+                <p class="hero-subtext">My portfolio is under construction, but something extraordinary is coming soon. Stay tuned for the reveal!</p>
+                
+                <!-- Interactive Countdown with SVG Animation -->
+                <div class="countdown-container">
+                    <div class="countdown-svg">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
+                        </svg>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">00</div>
+                            <div class="countdown-label">Days</div>
+                        </div>
                     </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="hours">00</div>
-                        <div class="countdown-label">Hours</div>
+                    <div class="countdown-svg">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
+                        </svg>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="hours">00</div>
+                            <div class="countdown-label">Hours</div>
+                        </div>
                     </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="minutes">00</div>
-                        <div class="countdown-label">Minutes</div>
+                    <div class="countdown-svg">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
+                        </svg>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="minutes">00</div>
+                            <div class="countdown-label">Minutes</div>
+                        </div>
                     </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="seconds">00</div>
-                        <div class="countdown-label">Seconds</div>
+                    <div class="countdown-svg">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
+                        </svg>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="seconds">00</div>
+                            <div class="countdown-label">Seconds</div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Progress Bar -->
-                <div class="progress-section fade-in delay-3">
-                    <div class="progress-info">
+                <!-- Animated Progress Bar with Tooltip -->
+                <div class="progress-section">
+                    <div class="progress-header">
                         <span>Development Progress</span>
-                        <span>85% Complete</span>
+                        <span class="progress-percent" data-tooltip="Current completion status">87%</span>
                     </div>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
+                    <div class="progress-track">
+                        <div class="progress-bar" style="width: 87%">
+                            <div class="progress-dot"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="features-section fade-in delay-4">
-            <h2 class="section-title">What's Coming</h2>
+        <!-- Features Section with Interactive Cards -->
+        <section id="features" class="features-section">
+            <h2 class="section-title">
+                <span class="title-decorator"></span>
+                <span class="title-text">Coming Features</span>
+                <span class="title-decorator"></span>
+            </h2>
+            
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
+                    <div class="feature-icon-container">
+                        <div class="feature-icon-bg"></div>
+                        <i class="fas fa-bolt feature-icon"></i>
                     </div>
-                    <h3 class="feature-title">Lightning Fast</h3>
-                    <p class="feature-desc">Optimized for speed with cutting-edge technology to deliver instant loading times.</p>
+                    <h3 class="feature-title">Next-Gen Performance</h3>
+                    <p class="feature-desc">Optimized with WebAssembly and edge computing for unmatched speed and responsiveness.</p>
+                    <div class="feature-hover-effect"></div>
                 </div>
+                
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                    <div class="feature-icon-container">
+                        <div class="feature-icon-bg"></div>
+                        <i class="fas fa-cube feature-icon"></i>
                     </div>
-                    <h3 class="feature-title">Fully Responsive</h3>
-                    <p class="feature-desc">Perfectly adapted for all devices from desktop to mobile with seamless UX.</p>
+                    <h3 class="feature-title">3D Experiences</h3>
+                    <p class="feature-desc">Immersive WebGL and Three.js powered visualizations and interactive elements.</p>
+                    <div class="feature-hover-effect"></div>
                 </div>
+                
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-lock"></i>
+                    <div class="feature-icon-container">
+                        <div class="feature-icon-bg"></div>
+                        <i class="fas fa-robot feature-icon"></i>
                     </div>
-                    <h3 class="feature-title">Secure & Private</h3>
-                    <p class="feature-desc">Enterprise-grade security to protect your data and ensure complete privacy.</p>
+                    <h3 class="feature-title">AI Integration</h3>
+                    <p class="feature-desc">Smart content generation and personalized experiences powered by machine learning.</p>
+                    <div class="feature-hover-effect"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Notify Section -->
-        <section id="contact" class="notify-section fade-in delay-5">
-            <h2>Get Notified When We Launch</h2>
-            <p class="notify-subtext">Join our mailing list to be the first to know when we go live and receive exclusive early access.</p>
-            <form class="notify-form">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit">Notify Me <i class="fas fa-paper-plane"></i></button>
-            </form>
+        <!-- Contact Section with Animated Form -->
+        <section id="contact" class="contact-section">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="contact-title">Let's Connect</h2>
+                    <p class="contact-subtext">Have a project in mind or want to collaborate? Reach out before the official launch!</p>
+                    
+                    <div class="contact-methods">
+                        <a href="mailto:contact@khemrajramtel.com.np" class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@khemrajramtel.com.np</span>
+                        </a>
+                        <a href="tel:+1234567890" class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+977 9861457788</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" required>
+                        <label for="name">Your Name</label>
+                        <div class="form-underline"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required>
+                        <label for="email">Email Address</label>
+                        <div class="form-underline"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="3" required></textarea>
+                        <label for="message">Your Message</label>
+                        <div class="form-underline"></div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
         </section>
 
-        <!-- Social Section -->
+        <!-- Social Media Section with Animated Links -->
         <section class="social-section">
-            <h2>Connect With Us</h2>
-            <p class="social-subtext">Follow our journey on social media for updates and behind-the-scenes content.</p>
+            <h2 class="social-title">Follow the Journey</h2>
+            <p class="social-subtext">Connect with me on social media for updates and behind-the-scenes content.</p>
+            
             <div class="social-links">
-                <a href="https://facebook.com/rajramtel999" target="_blank" class="social-link facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://twitter.com/rajramtel999" target="_blank" class="social-link twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://instagram.com/rajramtel999" target="_blank" class="social-link instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://linkedin.com/in/rajramtel999" target="_blank" class="social-link linkedin">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/rajramtel999" target="_blank" class="social-link github">
+                <a href="https://github.com/rajramtel999" target="_blank" class="social-link" aria-label="GitHub">
                     <i class="fab fa-github"></i>
+                    <span class="social-tooltip">GitHub</span>
+                </a>
+                <a href="https://linkedin.com/in/rajramtel999" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span class="social-tooltip">LinkedIn</span>
+                </a>
+                <a href="https://twitter.com/rajramtel999" target="_blank" class="social-link" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                    <span class="social-tooltip">Twitter</span>
+                </a>
+                <a href="https://instagram.com/rajramtel999" target="_blank" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span class="social-tooltip">Instagram</span>
+                </a>
+                <a href="https://facebook.com/rajramtel999" target="_blank" class="social-link" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span class="social-tooltip">Facebook</span>
                 </a>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer>
-            <a href="#" class="back-to-top">
-                <i class="fas fa-arrow-up"></i>
-            </a>
-            <p>© 2025 Khem Raj Ramtel. All Rights Reserved.</p>
+        <!-- Footer with Animated Signature -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="signature">
+                    <svg viewBox="0 0 500 100" class="signature-svg">
+                        <path class="signature-path" d="M10,50 Q30,20 50,50 T90,50" stroke="#00ffcc" fill="none"/>
+                    </svg>
+                </div>
+                <p class="copyright">&copy; <span id="currentYear"></span> Khem Raj Ramtel. All rights reserved.</p>
+                <a href="#" class="back-to-top" aria-label="Back to top">
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
         </footer>
     </div>
 
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <div class="theme-toggle-inner">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </div>
+    </button>
+
+    <!-- Loading Animation -->
+    <div class="page-loader">
+        <div class="loader-spinner">
+            <div class="spinner-circle"></div>
+            <div class="spinner-circle"></div>
+            <div class="spinner-circle"></div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove loader when page is loaded
+        const pageLoader = document.querySelector('.page-loader');
+        setTimeout(() => {
+            pageLoader.style.opacity = '0';
+            setTimeout(() => {
+                pageLoader.style.display = 'none';
+            }, 500);
+        }, 1000);
+
+        // Initialize 3D background
+        const initThreeJSBackground = () => {
+            const canvas = document.getElementById('threejs-background');
+            const renderer = new THREE.WebGLRenderer({
+                canvas,
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particleCount = 500;
+            
+            const posArray = new Float32Array(particleCount * 3);
+            for(let i = 0; i < particleCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0x00ffcc,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Animation loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.x += 0.0005;
+                particlesMesh.rotation.y += 0.0005;
+                renderer.render(scene, camera);
+            };
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
+        
+        // Initialize custom cursor
+        const initCustomCursor = () => {
+            const cursor = document.querySelector('.custom-cursor');
+            const links = document.querySelectorAll('a, button, .feature-card');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.classList.add('cursor-hover');
+                });
+                link.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-hover');
+                });
+            });
+        };
+        
+        // Initialize countdown timer
+        const initCountdown = () => {
+            const countdownDate = new Date();
+            countdownDate.setDate(countdownDate.getDate() + 14); // 14 days from now
+            
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                
+                // Update SVG circle animation
+                const circles = document.querySelectorAll('.countdown-circle');
+                const totalDuration = 14 * 24 * 60 * 60 * 1000; // Total duration in ms
+                const remaining = distance;
+                const elapsed = totalDuration - remaining;
+                
+                // Days circle (full rotation in 14 days)
+                const dayPercentage = (elapsed % (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000);
+                circles[0].style.strokeDashoffset = 283 * (1 - dayPercentage);
+                
+                // Hours circle (full rotation in 24 hours)
+                const hourPercentage = (elapsed % (60 * 60 * 1000)) / (60 * 60 * 1000);
+                circles[1].style.strokeDashoffset = 283 * (1 - hourPercentage);
+                
+                // Minutes circle (full rotation in 60 minutes)
+                const minutePercentage = (elapsed % (60 * 1000)) / (60 * 1000);
+                circles[2].style.strokeDashoffset = 283 * (1 - minutePercentage);
+                
+                // Seconds circle (full rotation in 60 seconds)
+                const secondPercentage = (elapsed % 1000) / 1000;
+                circles[3].style.strokeDashoffset = 283 * (1 - secondPercentage);
+                
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.querySelector('.countdown-container').innerHTML = '<div class="launch-message">Website Launched!</div>';
+                }
+            };
+            
+            // Initialize circles
+            const circles = document.querySelectorAll('.countdown-circle');
+            circles.forEach(circle => {
+                circle.style.strokeDasharray = '283';
+                circle.style.strokeDashoffset = '283';
+            });
+            
+            updateCountdown();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        };
+        
+        // Initialize theme toggle
+        const initThemeToggle = () => {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const body = document.body;
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                body.classList.toggle('light-mode');
+                
+                const isLight = body.classList.contains('light-mode');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            });
+        };
+        
+        // Initialize form animation
+        const initFormAnimation = () => {
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            formGroups.forEach(group => {
+                const input = group.querySelector('input, textarea');
+                const label = group.querySelector('label');
+                const underline = group.querySelector('.form-underline');
+                
+                input.addEventListener('focus', () => {
+                    label.classList.add('active');
+                    underline.style.transform = 'scaleX(1)';
+                });
+                
+                input.addEventListener('blur', () => {
+                    if (!input.value) {
+                        label.classList.remove('active');
+                    }
+                    underline.style.transform = 'scaleX(0)';
+                });
+                
+                // Check if there's pre-filled content
+                if (input.value) {
+                    label.classList.add('active');
+                }
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const submitBtn = contactForm.querySelector('.submit-btn');
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent';
+                    submitBtn.classList.add('success');
+                    
+                    setTimeout(() => {
+                        contactForm.reset();
+                        submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+                        submitBtn.classList.remove('success');
+                        document.querySelectorAll('.form-group label').forEach(label => {
+                            label.classList.remove('active');
+                        });
+                    }, 3000);
+                });
+            }
+        };
+        
+        // Initialize scroll animations
+        const initScrollAnimations = () => {
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.fade-in, .slide-in');
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        };
+        
+        // Initialize mobile menu
+        const initMobileMenu = () => {
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            menuBtn.addEventListener('click', () => {
+                menuBtn.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuBtn.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        };
+        
+        // Initialize navigation indicator
+        const initNavIndicator = () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navIndicator = document.querySelector('.nav-indicator');
+            
+            function setIndicator(el) {
+                navIndicator.style.width = `${el.offsetWidth}px`;
+                navIndicator.style.left = `${el.offsetLeft}px`;
+                navIndicator.style.backgroundColor = getComputedStyle(el).color;
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    setIndicator(link);
+                });
+                
+                link.addEventListener('click', () => {
+                    setIndicator(link);
+                });
+            });
+            
+            // Set initial position
+            if (navLinks.length > 0) {
+                setIndicator(navLinks[0]);
+            }
+        };
+        
+        // Initialize current year in footer
+        const initCurrentYear = () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        };
+        
+        // Initialize back to top button
+        const initBackToTop = () => {
+            const backToTopBtn = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        };
+        
+        // Initialize all functions
+        const init = () => {
+            initThreeJSBackground();
+            initCustomCursor();
+            initCountdown();
+            initThemeToggle();
+            initFormAnimation();
+            initScrollAnimations();
+            initMobileMenu();
+            initNavIndicator();
+            initCurrentYear();
+            initBackToTop();
+            
+            // Animate logo on load
+            const logoPath = document.querySelector('.logo-path');
+            const logoCircle = document.querySelector('.logo-circle');
+            if (logoPath && logoCircle) {
+                setTimeout(() => {
+                    logoPath.style.strokeDashoffset = '0';
+                    logoCircle.style.strokeDashoffset = '0';
+                }, 500);
+                
+                logoPath.style.strokeDasharray = '100';
+                logoPath.style.strokeDashoffset = '100';
+                logoCircle.style.strokeDasharray = '100';
+                logoCircle.style.strokeDashoffset = '100';
+                logoPath.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+                logoCircle.style.transition = 'stroke-dashoffset 1.5s ease-in-out 0.5s';
+            }
+            
+            // Animate signature in footer
+            const signaturePath = document.querySelector('.signature-path');
+            if (signaturePath) {
+                signaturePath.style.strokeDasharray = '500';
+                signaturePath.style.strokeDashoffset = '500';
+                setTimeout(() => {
+                    signaturePath.style.transition = 'stroke-dashoffset 2s ease-in-out';
+                    signaturePath.style.strokeDashoffset = '0';
+                }, 2000);
+            }
+        };
+        // Logo click animation and functionality
+const logoLink = document.getElementById('logoLink');
+const logoImage = document.querySelector('.logo-image');
+const logoText = document.querySelector('.logo-text');
+
+// Add loaded class after page load
+window.addEventListener('load', () => {
+    logoLink.classList.add('loaded');
+});
+
+// Click animation and navigation
+logoLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Click animation
+    logoImage.style.transform = 'scale(0.8) rotate(-20deg)';
+    logoText.style.transform = 'translateX(5px) scale(0.95)';
+    logoText.style.opacity = '0.8';
+    
+    // Add ripple effect
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple-effect');
+    ripple.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
+    ripple.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
+    this.appendChild(ripple);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+        ripple.remove();
+    }, 1000);
+    
+    // Navigate after animation
+    setTimeout(() => {
+        window.location.href = this.href;
+    }, 300);
+});
+
+// Hover effects
+logoLink.addEventListener('mouseenter', () => {
+    logoImage.style.transform = 'rotate(15deg) scale(1.1)';
+    logoText.style.transform = 'translateX(5px)';
+});
+
+logoLink.addEventListener('mouseleave', () => {
+    logoImage.style.transform = 'rotate(0) scale(1)';
+    logoText.style.transform = 'translateX(0)';
+    logoText.style.opacity = '1';
+});
+        
+        // Start initialization
+        init();
+    });
+    </script>
 </body>
 </html>
