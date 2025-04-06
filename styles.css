@@ -379,17 +379,17 @@ body.light-mode {
 
 .title-word-1 {
   /* align-self: flex-start; */
-  margin-left: 0;
+  margin-left: 10rem;
 }
 
 .title-word-2 {
-  /* align-self: center; */
-  margin-left: 8rem;
+  align-self: center;
+  /* margin-left: 8rem; */
 }
 
 .title-word-3 {
   /* align-self: flex-end; */
-  margin-left: 15rem;
+  margin-left: 20rem;
 }
 
 @keyframes gradient-text {
