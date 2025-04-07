@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Khem Raj Ramtel's website is under construction with exciting features coming soon. Stay tuned for the launch!">
     <meta name="keywords" content="Khem Raj Ramtel, portfolio, coming soon, under construction">
     <meta name="author" content="Khem Raj Ramtel">
@@ -287,7 +287,6 @@
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-
 document.addEventListener('DOMContentLoaded', function() {
     // Remove loader when page is loaded
     const pageLoader = document.querySelector('.page-loader');
@@ -539,6 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
         menuBtn.addEventListener('click', () => {
             menuBtn.classList.toggle('active');
             navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         });
         
         // Close menu when clicking on a link
@@ -546,6 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', () => {
                 menuBtn.classList.remove('active');
                 navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
             });
         });
     };
@@ -696,5 +697,6 @@ document.addEventListener('DOMContentLoaded', function() {
     init();
 });
     </script>
+    
 </body>
 </html>

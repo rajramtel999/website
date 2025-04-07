@@ -70,6 +70,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -85,6 +86,10 @@ body {
 body.light-mode {
   background-color: var(--light-bg);
   color: var(--light-text);
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 /* 3D Background */
@@ -1387,6 +1392,8 @@ body.light-mode {
       z-index: var(--z-high);
       display: flex;
       gap: var(--space-lg);
+      padding: var(--space-xl);
+      box-sizing: border-box;
   }
   
   .nav-menu.active {
