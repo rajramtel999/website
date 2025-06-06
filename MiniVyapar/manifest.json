@@ -1,6 +1,6 @@
 {
     "name": "Mini Vyapar",
-    "short_name": "MV",
+    "short_name": "Mini Vyapar",
     "start_url": "/MiniVyapar/",
     "display": "standalone",
     "background_color": "#faf9f6",
