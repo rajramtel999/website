@@ -1,0 +1,21 @@
+{
+    "name": "Mini Vyapar",
+    "short_name": "MV",
+    "start_url": "/MiniVyapar/",
+    "display": "standalone",
+    "background_color": "#faf9f6",
+    "theme_color": "#1b91eb",
+    "icons": [
+      {
+        "src": "text_logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "text_logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
+  
