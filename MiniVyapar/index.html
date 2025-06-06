@@ -26,6 +26,37 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    
-</body>
+    <div class="page-wrapper">
+      <div class="container">
+        <header>
+          <img src="logo.png" alt="Mini Vyapar Logo" class="logo" /> <br>
+          <img src="only_text.png" alt="Text Logo" class="text-logo" />
+        </header>
+  
+        <section class="sales-module">
+          <h2>Sales Entry</h2>
+          <form id="sales-form">
+            <input type="text" id="product-name" placeholder="Product Name" required />
+            <input type="number" id="price" placeholder="Price (Rs.)" required />
+            <input type="number" id="quantity" placeholder="Quantity" required />
+            <button type="submit">Add Sale</button>
+          </form>
+  
+          <div class="sales-output">
+            <h3>Sales List</h3>
+            <ul id="sales-list"></ul>
+            <p><strong>Total Sales:</strong> Rs. <span id="total-sales">0</span></p>
+          </div>
+        </section>
+      </div>
+  
+      <footer>
+        © 2025 Mini Vyapar. All rights reserved.
+      </footer>
+    </div>
+  
+    <script src="script.js"></script>
+  </body>
+  
+  
 </html>
