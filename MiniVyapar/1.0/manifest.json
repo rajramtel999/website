@@ -1,21 +1,29 @@
 {
-    "name": "Mini Vyapar",
-    "short_name": "Mini Vyapar",
-    "start_url": "/MiniVyapar/",
-    "display": "standalone",
-    "background_color": "#faf9f6",
-    "theme_color": "#1b91eb",
-    "icons": [
-      {
-        "src": "logo.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      },
-      {
-        "src": "logo.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "id": "/MiniVyapar/1.0",
+  "name": "Mini Vyapar",
+  "short_name": "Mini Vyapar",
+  "description": "Mini Vyapar is a simple, lightweight, and offline-ready POS system for small Nepali businesses. It helps shopkeepers manage sales, inventory, and expenses with ease — Sajilo Hisab, Digital Vyapar.",
+  "start_url": "/MiniVyapar/1.0",
+  "dir": "ltr",
+  "scope": "/MiniVyapar/1.0/",
+  "lang": "en-US",
+  "orientation": "any",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "background_color": "#FAF9F6",
+  "theme_color": "#1b91eb",
+  "categories": ["business", "finance", "shopping"],
+  "edge_side_panel": false,
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
