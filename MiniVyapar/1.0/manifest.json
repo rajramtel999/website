@@ -7,7 +7,7 @@
   "dir": "ltr",
   "scope": "/MiniVyapar/1.0/",
   "lang": "en-US",
-  "orientation": "any",
+  "orientation": "portrait",
   "display": "standalone",
   "display_override": ["fullscreen", "standalone", "minimal-ui"],
   "background_color": "#FAF9F6",
