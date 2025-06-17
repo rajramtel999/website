@@ -1,29 +1,140 @@
 {
-  "id": "/MiniVyapar/1.0",
-  "name": "Mini Vyapar",
-  "short_name": "Mini Vyapar",
-  "description": "Mini Vyapar is a simple, lightweight, and offline-ready POS system for small Nepali businesses. It helps shopkeepers manage sales, inventory, and expenses with ease — Sajilo Hisab, Digital Vyapar.",
-  "start_url": "/MiniVyapar/1.0",
-  "dir": "ltr",
-  "scope": "/MiniVyapar/1.0/",
-  "lang": "en-US",
-  "orientation": "portrait",
-  "display": "standalone",
-  "display_override": ["fullscreen", "standalone", "minimal-ui"],
-  "background_color": "#FAF9F6",
-  "theme_color": "#1b91eb",
-  "categories": ["business", "finance", "shopping"],
-  "edge_side_panel": false,
-  "icons": [
-    {
-      "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png"
+    "id": "/MiniVyapar/1.0",
+    "name": "Mini Vyapar",
+    "short_name": "Mini Vyapar",
+    "description": "Mini Vyapar is a simple, lightweight, and offline-ready POS system for small Nepali businesses. It helps shopkeepers manage sales, inventory, and expenses with ease — Sajilo Hisab, Digital Vyapar.",
+    "start_url": "/MiniVyapar/1.0",
+    "dir": "ltr",
+    "scope": "/MiniVyapar/1.0/",
+    "lang": "en-US",
+    "orientation": "portrait",
+    "display": "window-controls-overlay",
+    "display_override": ["fullscreen", "standalone", "minimal-ui", "window-controls-overlay"],
+    "background_color": "#FAF9F6",
+    "theme_color": "#1b91eb",
+    "categories": ["business", "finance", "shopping"],
+    "edge_side_panel": {
+      "preferred_width": 500
     },
-    {
-      "src": "logo.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ]
-}
+    "icons": [
+      {
+        "src": "logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "file_handlers": {
+      "data-files": {
+        "name": "Data Files",
+        "accept": {
+          "text/csv": [".csv"],
+          "application/json": [".json"],
+          "text/plain": [".txt"]
+        }
+      }
+    },
+    "handle_links": [
+      {
+        "matches": ["https://khemrajramtel.com.np/MiniVyapar/1.0/*"],
+        "action": {
+          "navigate": "/MiniVyapar/1.0"
+        },
+        "preferred_application": true
+      }
+    ],
+    "protocol_handlers": [
+      {
+        "protocol": "web+minivyapar",
+        "url": "https://khemrajramtel.com.np/MiniVyapar/1.0/?url=%s"
+      }
+    ],
+    "share_target": {
+      "action": "/MiniVyapar/1.0/share-target",
+      "method": "POST",
+      "enctype": "multipart/form-data",
+      "params": {
+        "title": "name",
+        "text": "description",
+        "url": "link"
+      }
+    },
+    "shortcuts": [
+      {
+        "name": "New Sale",
+        "short_name": "Sale",
+        "description": "Create a new sale entry",
+        "url": "/MiniVyapar/1.0/sale",
+        "icons": [{ "src": "icons/sale.png", "sizes": "96x96", "type": "image/png" }]
+      },
+      {
+        "name": "Inventory",
+        "short_name": "Stock",
+        "description": "View or update inventory",
+        "url": "/MiniVyapar/1.0/inventory",
+        "icons": [{ "src": "icons/inventory.png", "sizes": "96x96", "type": "image/png" }]
+      },
+      {
+        "name": "Reports",
+        "short_name": "Reports",
+        "description": "View sales and expense reports",
+        "url": "/MiniVyapar/1.0/reports",
+        "icons": [{ "src": "icons/reports.png", "sizes": "96x96", "type": "image/png" }]
+      }
+    ],
+    "widgets": [
+      {
+        "name": "Mini Vyapar Sales Widget",
+        "short_name": "Sales Widget",
+        "description": "Quick overview of your sales",
+        "src": "/MiniVyapar/1.0/widgets/sales-widget.html",
+        "sizes": "200x200",
+        "category": ["business", "finance"]
+      }
+    ],
+    "serviceworker": {
+      "src": "/MiniVyapar/1.0/sw.js",
+      "scope": "/MiniVyapar/1.0/",
+      "type": "classic"
+    },
+    "launch_handler": {
+      "client_mode": "navigate-existing"
+    },
+    "screenshots": [
+      {
+        "src": "screenshots/screen1.png",
+        "sizes": "640x480",
+        "type": "image/png",
+        "label": "Sales Dashboard"
+      },
+      {
+        "src": "screenshots/screen2.png",
+        "sizes": "640x480",
+        "type": "image/png",
+        "label": "Inventory Overview"
+      }
+    ],
+    "iarc_rating_id": "YOUR_IARC_RATING_ID_HERE",
+    "prefer_related_applications": false,
+    "related_applications": [
+      {
+        "platform": "play",
+        "url": "https://play.google.com/store/apps/details?id=YOUR_APP_ID",
+        "id": "YOUR_APP_ID"
+      },
+      {
+        "platform": "itunes",
+        "url": "https://apps.apple.com/app/idYOUR_APP_ID",
+        "id": "YOUR_APP_ID"
+      }
+    ],
+    "scope_extensions": [
+      "https://khemrajramtel.com.np",
+      "https://subdomain.khemrajramtel.com.np"
+    ]
+  }
+  

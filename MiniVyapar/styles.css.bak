@@ -1,0 +1,195 @@
+/* Reset + Layout base */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #faf9f6;
+  color: #333;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main container */
+.download-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+  flex: 1; /* Let it grow and push footer to bottom */
+}
+
+/* Logo section */
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 30px;
+}
+
+h1.logo-text {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #1b91eb;
+  user-select: none;
+  animation: fadeInUp 1s ease forwards;
+  margin: 0;
+}
+
+h1.logo-text img {
+  display: block;
+  max-width: 120px;
+  height: auto;
+  margin: 0;
+  transition: transform 0.3s ease;
+}
+
+.tagline-logo {
+  max-width: 280px;
+  width: 100%;
+  text-align: center;
+  animation: fadeInUp 1s ease forwards;
+  margin: 0;
+}
+
+.tagline-logo img {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 0;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+/* Description */
+.description {
+  margin-bottom: 30px;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.description h2 {
+  font-size: 1.5rem;
+  color: #1b91eb;
+  margin-bottom: 10px;
+}
+
+.description p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+/* Features */
+.features {
+  text-align: left;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  animation: fadeIn 1.4s ease forwards;
+}
+
+.features h3 {
+  font-size: 1.3rem;
+  color: #1b91eb;
+  margin-bottom: 8px;
+}
+
+.features ul {
+  list-style: disc;
+  padding-left: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #1b91eb;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(27, 145, 235, 0.3);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.download-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.download-btn.android {
+  background-color: #2fb97c;
+  box-shadow: 0 5px 15px rgba(47, 185, 124, 0.3);
+}
+
+.download-btn.android:hover {
+  background-color: #249765;
+  box-shadow: 0 8px 20px rgba(36, 151, 101, 0.5);
+  transform: translateY(-3px);
+}
+
+.download-btn.windows:hover {
+  background-color: #176fb4;
+  box-shadow: 0 8px 20px rgba(23, 111, 180, 0.5);
+  transform: translateY(-3px);
+}
+
+/* Footer */
+.site-footer {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  padding: 10px 0px;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Enhancements */
+@media (min-width: 768px) {
+  .description, .features {
+    text-align: left;
+    padding: 0 40px;
+  }
+
+  .features ul {
+    padding-left: 40px;
+  }
+}
