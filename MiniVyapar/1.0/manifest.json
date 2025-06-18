@@ -62,14 +62,20 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
-  "screenshots": 
-    {
-      "src": "screenshots/screen1.png",
-      "sizes": "640x480",
-      "type": "image/png",
-      "label": "Dashboard"
-    },
-    
+"screenshots": [
+  {
+    "src": "screenshots/screen1.png",
+    "sizes": "640x480",
+    "type": "image/png",
+    "label": "Dashboard"
+  },
+  {
+    "src": "screenshots/screen2.png",
+    "sizes": "640x480",
+    "type": "image/png",
+    "label": "Dashboard - Reports"
+  }
+],
 
   "iarc_rating_id": "YOUR_IARC_RATING_ID_HERE",
   "prefer_related_applications": false,
