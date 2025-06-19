@@ -198,19 +198,21 @@
                     </div>
                 </div>
                 
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="1730f946-6cc3-4d8b-a2c3-dc44e43d9b09">
+                
                     <div class="form-group">
-                        <input type="text" id="name" required>
+                        <input type="text" id="name" name="name" required>
                         <label for="name">Your Name</label>
                         <div class="form-underline"></div>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required>
                         <label for="email">Email Address</label>
                         <div class="form-underline"></div>
                     </div>
                     <div class="form-group">
-                        <textarea id="message" rows="3" required></textarea>
+                        <textarea id="message" name="message" rows="3" required></textarea>
                         <label for="message">Your Message</label>
                         <div class="form-underline"></div>
                     </div>
