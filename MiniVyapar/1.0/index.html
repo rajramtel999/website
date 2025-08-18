@@ -1,148 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="Mini Vyapar is a lightweight, beginner-friendly POS system designed for small local businesses to manage sales, inventory, and expenses easily. Sajilo Hisab, Digital Vyapar." />
-  <meta name="keywords" content="Mini Vyapar, POS system, smartbill, digital business, sales tracking, inventory management, expense tracking, local shop software, simple POS, Nepali POS, sajilo hisab" />
-  <meta name="author" content="Mini Vyapar Team (Khem Raj Ramtel, Santosh Sunuwar, Rohit Lama Tamang)" />
-  <meta name="theme-color" content="#1b91eb" />
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Mini Vyapar - Sajilo Hisab, Digital Vyapar" />
-  <meta property="og:description" content="A simple and user-friendly POS system made for Nepali local businesses. Track sales, manage inventory, and record expenses with ease." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.khemrajramtel.com.np/MiniVyapar" />
-  <meta property="og:image" content="https://www.khemrajramtel.com.np/MiniVyapar/logo.png" />
-  
-  <title>Mini Vyapar</title>
-
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" href="logo/favicon.png" sizes="any" type="image/png" />
-  <link rel="apple-touch-icon" href="logo/favicon.png" sizes="any" />
-  <link rel="manifest" href="manifest.json" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Business Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="logo-bar">
-    <img src="logo/side_text_logo.png" alt="Mini Vyapar Logo" class="logo" />
-  </div>
+    <div class="app-container">
+        <!-- App Header -->
+        <header class="app-header">
+            <h1>DASHBOARD</h1>
+        </header>
 
-  <header>
-    <nav>
-      <a href="#sales">Sales</a>
-      <a href="#inventory">Inventory</a>
-      <a href="#expenses">Expenses</a>
-      <a href="#reports">Reports</a>
-    </nav>
-  </header>
+        <!-- Main Content -->
+        <main class="app-content" id="appContent">
+            <!-- Content will be dynamically loaded here -->
+        </main>
 
-  <main>
-    <section id="sales">
-      <h2>Sales</h2>
-      <form id="sales-form">
-        <input type="hidden" id="sale-id" />
-        <label>
-          Product Name
-          <input type="text" id="sale-product" required placeholder="Enter product name" list="product-list" />
-          <datalist id="product-list"></datalist>
-        </label>
-        <label>
-          Quantity
-          <input type="number" id="sale-quantity" min="1" required />
-        </label>
-        <label>
-          Price per Unit
-          <input type="number" id="sale-price" min="0" step="0.01" required />
-        </label>
-        <button type="submit" id="sales-submit-btn">Add Sale</button>
-        <button type="button" id="sales-cancel-edit" class="hidden">Cancel Edit</button>
-      </form>
-      <table id="sales-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price/Unit</th>
-            <th>Total</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-btn" data-page="sales">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Sales</span>
+            </button>
+            <button class="nav-btn" data-page="inventory">
+                <i class="fas fa-boxes"></i>
+                <span>Inventory</span>
+            </button>
+            <button class="nav-btn" data-page="expenses">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Expenses</span>
+            </button>
+        </nav>
+    </div>
 
-    <section id="inventory">
-      <h2>Inventory</h2>
-      <form id="inventory-form">
-        <input type="hidden" id="inventory-id" />
-        <label>
-          Product Name
-          <input type="text" id="inventory-product" required placeholder="Enter product name" />
-        </label>
-        <label>
-          Stock Quantity
-          <input type="number" id="inventory-quantity" min="0" required />
-        </label>
-        <button type="submit" id="inventory-submit-btn">Add/Update Inventory</button>
-        <button type="button" id="inventory-cancel-edit" class="hidden">Cancel Edit</button>
-      </form>
-      <table id="inventory-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Stock Quantity</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-
-    <section id="expenses">
-      <h2>Expenses</h2>
-      <form id="expenses-form">
-        <input type="hidden" id="expense-id" />
-        <label>
-          Expense Description
-          <input type="text" id="expense-desc" required placeholder="Enter expense details" />
-        </label>
-        <label>
-          Amount
-          <input type="number" id="expense-amount" min="0" step="0.01" required />
-        </label>
-        <button type="submit" id="expenses-submit-btn">Add Expense</button>
-        <button type="button" id="expenses-cancel-edit" class="hidden">Cancel Edit</button>
-      </form>
-      <table id="expenses-table">
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
-
-  <script src="scripts.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/MiniVyapar/1.0/sw.js')
-          .then(registration => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch(error => {
-            console.error('Service Worker registration failed:', error);
-          });
-      });
-    }
-  </script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
