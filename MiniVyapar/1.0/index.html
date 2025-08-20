@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Business Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mini Vyapar POS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- App Header -->
         <header class="app-header">
-            <h1>DASHBOARD</h1>
+            <h1><i class="fas fa-store"></i> MINI VYAPAR</h1>
         </header>
 
-        <!-- Main Content -->
         <main class="app-content" id="appContent">
-            <!-- Content will be dynamically loaded here -->
+            <!-- Content will be loaded here -->
         </main>
 
-        <!-- Bottom Navigation -->
         <nav class="bottom-nav">
-            <button class="nav-btn active" data-page="home">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+            <button class="nav-btn active" data-page="dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
             </button>
             <button class="nav-btn" data-page="sales">
                 <i class="fas fa-shopping-cart"></i>
@@ -38,6 +35,81 @@
                 <span>Expenses</span>
             </button>
         </nav>
+
+        <!-- Floating Action Buttons -->
+        <button class="fab main-fab" id="mainFab">
+            <i class="fas fa-plus"></i>
+        </button>
+        
+        <div class="fab-menu">
+            <button class="fab sub-fab" id="addProductFab" title="Add Product">
+                <i class="fas fa-cube"></i>
+            </button>
+            <button class="fab sub-fab" id="newSaleFab" title="New Sale">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+        </div>
+
+        <!-- Add Product Modal -->
+        <div class="modal" id="productModal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2><i class="fas fa-cube"></i> Add New Product</h2>
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="productName"><i class="fas fa-tag"></i> Product Name</label>
+                        <input type="text" id="productName" required placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice"><i class="fas fa-rupee-sign"></i> Price (NPR)</label>
+                        <input type="number" id="productPrice" min="1" step="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="productStock"><i class="fas fa-box-open"></i> Stock Quantity</label>
+                        <input type="number" id="productStock" min="0" required placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory"><i class="fas fa-layer-group"></i> Category</label>
+                        <select id="productCategory">
+                            <option value="">Select Category</option>
+                            <option value="food">Food & Beverages</option>
+                            <option value="snacks">Snacks</option>
+                            <option value="drinks">Drinks</option>
+                            <option value="stationery">Stationery</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="productImage"><i class="fas fa-image"></i> Image URL</label>
+                        <input type="url" id="productImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelProduct">Cancel</button>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> Save Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- New Sale Modal -->
+        <div class="modal" id="saleModal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeSaleModal">&times;</span>
+                <h2><i class="fas fa-shopping-cart"></i> New Sale</h2>
+                <div class="sale-content">
+                    <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
+                        Sale functionality coming soon...
+                    </p>
+                    <div class="sale-preview">
+                        <div class="sale-item">
+                            <span>Select products to add to sale</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
