@@ -1,117 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mini Vyapar POS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mini Vyapar - POS</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
-            <h1><i class="fas fa-store"></i> MINI VYAPAR</h1>
-        </header>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-container">
+        <img src="assets/logo.png" alt="Mini Vyapar Icon" class="logo-icon">
+        <img src="assets/only_text.png" alt="Mini Vyapar Text" class="logo-text-img">
+      </div>
+      <div class="header-actions">
+        <button id="btn-sync" class="btn-icon"><i class="ri-refresh-line"></i></button>
+        <button id="btn-settings" class="btn-icon"><i class="ri-settings-3-line"></i></button>
+      </div>
+    </header>
 
-        <main class="app-content" id="appContent">
-            <!-- Content will be loaded here -->
-        </main>
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Dashboard Page -->
+      <section id="page-dashboard" class="page active">
+        <div class="container">
+          <!-- Summary Cards -->
+          <div class="card-grid">
+            <article class="card summary-card primary">
+              <div class="icon-wrapper"><i class="ri-hand-coin-line icon"></i></div>
+              <div class="summary-content">
+                <p class="label">Today's Sales</p>
+                <h3 class="value" id="dashboard-sales">Rs 0</h3>
+                <div class="trend"><i class="ri-arrow-up-s-line"></i> 12% from yesterday</div>
+              </div>
+            </article>
+            <article class="card summary-card warning">
+              <div class="icon-wrapper"><i class="ri-alert-line icon"></i></div>
+              <div class="summary-content">
+                <p class="label">Low Stock</p>
+                <h3 class="value" id="dashboard-alerts">0 items</h3>
+                <div class="trend">Check inventory</div>
+              </div>
+            </article>
+            <article class="card summary-card success">
+              <div class="icon-wrapper"><i class="ri-bank-card-line icon"></i></div>
+              <div class="summary-content">
+                <p class="label">Today's Expenses</p>
+                <h3 class="value" id="dashboard-expenses">Rs 0</h3>
+                <div class="trend"><i class="ri-arrow-down-s-line"></i> 5% from yesterday</div>
+              </div>
+            </article>
+          </div>
 
-        <nav class="bottom-nav">
-            <button class="nav-btn active" data-page="dashboard">
-                <i class="fas fa-chart-line"></i>
-                <span>Dashboard</span>
-            </button>
-            <button class="nav-btn" data-page="sales">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Sales</span>
-            </button>
-            <button class="nav-btn" data-page="inventory">
-                <i class="fas fa-boxes"></i>
-                <span>Inventory</span>
-            </button>
-            <button class="nav-btn" data-page="expenses">
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Expenses</span>
-            </button>
-        </nav>
-
-        <!-- Floating Action Buttons -->
-        <button class="fab main-fab" id="mainFab">
-            <i class="fas fa-plus"></i>
-        </button>
-        
-        <div class="fab-menu">
-            <button class="fab sub-fab" id="addProductFab" title="Add Product">
-                <i class="fas fa-cube"></i>
-            </button>
-            <button class="fab sub-fab" id="newSaleFab" title="New Sale">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-        </div>
-
-        <!-- Add Product Modal -->
-        <div class="modal" id="productModal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h2><i class="fas fa-cube"></i> Add New Product</h2>
-                <form id="productForm">
-                    <div class="form-group">
-                        <label for="productName"><i class="fas fa-tag"></i> Product Name</label>
-                        <input type="text" id="productName" required placeholder="Enter product name">
-                    </div>
-                    <div class="form-group">
-                        <label for="productPrice"><i class="fas fa-rupee-sign"></i> Price (NPR)</label>
-                        <input type="number" id="productPrice" min="1" step="0.01" required placeholder="0.00">
-                    </div>
-                    <div class="form-group">
-                        <label for="productStock"><i class="fas fa-box-open"></i> Stock Quantity</label>
-                        <input type="number" id="productStock" min="0" required placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="productCategory"><i class="fas fa-layer-group"></i> Category</label>
-                        <select id="productCategory">
-                            <option value="">Select Category</option>
-                            <option value="food">Food & Beverages</option>
-                            <option value="snacks">Snacks</option>
-                            <option value="drinks">Drinks</option>
-                            <option value="stationery">Stationery</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="productImage"><i class="fas fa-image"></i> Image URL</label>
-                        <input type="url" id="productImage" placeholder="https://example.com/image.jpg">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="cancel-btn" id="cancelProduct">Cancel</button>
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-save"></i> Save Product
-                        </button>
-                    </div>
-                </form>
+          <!-- Quick Items -->
+          <section class="quick-items-section">
+            <div class="section-header">
+              <h4>Quick Sell</h4>
+              <button id="btn-view-all" class="btn-link">View All</button>
             </div>
-        </div>
+            <div id="quick-items-grid" class="quick-items-grid"></div>
+          </section>
 
-        <!-- New Sale Modal -->
-        <div class="modal" id="saleModal">
-            <div class="modal-content">
-                <span class="close-btn" id="closeSaleModal">&times;</span>
-                <h2><i class="fas fa-shopping-cart"></i> New Sale</h2>
-                <div class="sale-content">
-                    <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">
-                        Sale functionality coming soon...
-                    </p>
-                    <div class="sale-preview">
-                        <div class="sale-item">
-                            <span>Select products to add to sale</span>
-                        </div>
-                    </div>
-                </div>
+          <!-- Recent Transactions -->
+          <section class="activities-section">
+            <div class="section-header">
+              <h4>Recent Transactions</h4>
             </div>
+            <ul id="activity-feed" class="activity-feed"></ul>
+            <div id="empty-activity" class="empty-state">
+              <i class="ri-time-line placeholder-icon"></i>
+              <p>No transactions today</p>
+            </div>
+          </section>
         </div>
+      </section>
+
+      <!-- Sales Page -->
+      <section id="page-sales" class="page">
+        <div class="container">
+          <header class="new-sale-header">
+            <button id="btn-back-dashboard" class="btn-icon back-button"><i class="ri-arrow-left-line"></i></button>
+            <h2 class="page-title">New Sale</h2>
+            <div class="tabs">
+              <button class="tab active" data-tab="favorites">Favorites</button>
+              <button class="tab" data-tab="top-sellers">Top Sellers</button>
+              <button class="tab" data-tab="all">All Products</button>
+            </div>
+            <div class="search-wrapper">
+              <i class="ri-search-line search-icon"></i>
+              <input type="text" id="search-products" class="search-input" placeholder="Search products..."/>
+            </div>
+          </header>
+          <main class="product-grid" id="product-grid"></main>
+          <!-- Cart Bottom Bar -->
+          <div id="cart-bottom-bar" class="cart-bottom-bar" data-state="hidden">
+            <div id="cart-header" class="cart-header">
+              <h5>Cart <span id="cart-count">(0)</span></h5>
+              <span id="cart-total">Rs 0</span>
+            </div>
+            <div id="cart-body" class="cart-body">
+              <div id="cart-items" class="cart-items-list"></div>
+              <div class="cart-summary">
+                <div>Subtotal: <span id="cart-subtotal">Rs 0</span></div>
+                <div>Tax (13%): <span id="cart-tax">Rs 0</span></div>
+                <div>Total: <strong id="cart-grand-total">Rs 0</strong></div>
+              </div>
+              <div class="cart-actions">
+                <button id="btn-checkout" class="btn-primary">Checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inventory Page -->
+      <section id="page-inventory" class="page">
+        <div class="container">
+          <div class="section-header">
+            <h3>Inventory</h3>
+            <button id="btn-add-product" class="btn-primary">+ Add Product</button>
+          </div>
+          <div id="inventory-list"></div>
+        </div>
+      </section>
+
+      <!-- Expenses Page -->
+      <section id="page-expenses" class="page">
+        <div class="container">
+          <div class="section-header">
+            <h3>Expenses</h3>
+            <button id="btn-add-expense" class="btn-primary">+ Add Expense</button>
+          </div>
+          <div id="expenses-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="dashboard">
+        <i class="ri-home-5-line"></i>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-page="sales">
+        <i class="ri-line-chart-line"></i>
+        <span>Sales</span>
+      </button>
+      <button class="nav-item" data-page="inventory">
+        <i class="ri-box-3-line"></i>
+        <span>Inventory</span>
+      </button>
+      <button class="nav-item" data-page="expenses">
+        <i class="ri-bank-card-line"></i>
+        <span>Expenses</span>
+      </button>
+    </nav>
+
+    <!-- Floating Action Button -->
+    <button id="fab-add-sale" class="fab">
+      <i class="ri-add-line"></i>
+    </button>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <!-- Bottom Sheet: Add Product -->
+  <div id="sheet-product" class="bottom-sheet">
+    <div class="sheet-container">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-header">
+        <h3>Add Product</h3>
+        <button id="cancel-product" class="btn-close"><i class="ri-close-line"></i></button>
+      </div>
+      <div id="product-form" class="sheet-body"></div>
+      <div class="sheet-actions">
+        <button id="save-product" class="btn-primary">Add Product</button>
+      </div>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Bottom Sheet: Add Expense -->
+  <div id="sheet-expense" class="bottom-sheet">
+    <div class="sheet-container">
+      <div class="sheet-drag-handle"></div>
+      <div class="sheet-header">
+        <h3>Add Expense</h3>
+        <button id="cancel-expense" class="btn-close"><i class="ri-close-line"></i></button>
+      </div>
+      <div id="expense-form" class="sheet-body"></div>
+      <div class="sheet-actions">
+        <button id="save-expense" class="btn-primary">Add Expense</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
