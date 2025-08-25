@@ -1,46 +1,48 @@
-// This is the "Offline page" service worker
-
+// Import Workbox from Google's CDN
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-const CACHE = "pwabuilder-page";
+// Set cache name
+const CACHE = 'pwabuilder-offline-cache-v1';
 
-// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
-const offlineFallbackPage = "ToDo-replace-this-name.html";
+// ✅ Replace with your actual offline fallback page
+const offlineFallbackPage = '/MiniVyapar/1.0/offline.html';  // make sure this file exists!
 
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
+// Handle skipWaiting from app
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
-self.addEventListener('install', async (event) => {
+// On install: cache offline fallback page
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE)
       .then((cache) => cache.add(offlineFallbackPage))
   );
 });
 
+// Enable navigation preload
 if (workbox.navigationPreload.isSupported()) {
   workbox.navigationPreload.enable();
 }
 
+// Handle fetch for navigation (i.e., full page loads)
 self.addEventListener('fetch', (event) => {
   if (event.request.mode === 'navigate') {
     event.respondWith((async () => {
       try {
+        // Try preloaded response
         const preloadResp = await event.preloadResponse;
+        if (preloadResp) return preloadResp;
 
-        if (preloadResp) {
-          return preloadResp;
-        }
-
+        // Try network
         const networkResp = await fetch(event.request);
         return networkResp;
       } catch (error) {
-
+        // If both fail, show cached offline fallback
         const cache = await caches.open(CACHE);
-        const cachedResp = await cache.match(offlineFallbackPage);
-        return cachedResp;
+        return await cache.match(offlineFallbackPage);
       }
     })());
   }
