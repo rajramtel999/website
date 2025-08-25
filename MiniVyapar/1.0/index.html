@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="any" href="icons/icon-512.png">
   <link rel="stylesheet" href="styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+
 </head>
 <body>
   <div id="app">
@@ -200,6 +202,10 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js">
+    if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
+  </script>
 </body>
 </html>
