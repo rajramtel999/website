@@ -47,3 +47,27 @@ self.addEventListener('fetch', (event) => {
     })());
   }
 });
+
+self.addEventListener('periodicsync', (event) => {
+    if (event.tag === 'content-sync') {
+      event.waitUntil(syncContent());
+    }
+  });
+  
+  async function syncContent() {
+    try {
+      // Example: fetch latest data or update cache here
+      const cache = await caches.open('pwabuilder-offline-cache-v1');
+  
+      // Fetch fresh content, e.g., your API or assets
+      const response = await fetch('/MiniVyapar/1.0/api/latest-data'); // update URL accordingly
+  
+      if (response.ok) {
+        await cache.put('/MiniVyapar/1.0/api/latest-data', response.clone());
+        console.log('Background sync: content updated');
+      }
+    } catch (error) {
+      console.error('Background sync failed:', error);
+    }
+  }
+  

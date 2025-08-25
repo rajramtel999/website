@@ -5,11 +5,19 @@
     "display": "standalone",
     "background_color": "#f9f9f9",
     "theme_color": "#005acb",
-    "dir": "left",
+    "dir": "ltr",
+    "prefer_related_applications": false,
     "lang": "en-US",
     "scope": "/MiniVyapar/1.0/",
   "description": "Mini Vyapar is a lightweight, easy-to-use Point of Sale (POS) web app designed specifically for small local shops. It simplifies inventory management, sales tracking, and expense recording with offline capabilities, requiring no technical skills. Mini Vyapar empowers shopkeepers by digitizing daily operations, improving accuracy, and helping streamline their business.",
   "id": "MiniVyapar",
+  "categories": ["finance", "shopping", "business", "productivity"],
+  "scope_extensions": [
+  "https://khemrajramel.com.np/MiniVyapar/1.0"
+],
+  "launch_handler": {
+  "client_mode": "focus-existing"
+},
     
     "icons": [
       {

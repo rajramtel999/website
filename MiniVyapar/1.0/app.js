@@ -492,6 +492,30 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+if ('serviceWorker' in navigator && 'periodicSync' in navigator.serviceWorker) {
+  navigator.serviceWorker.ready.then(async (registration) => {
+    try {
+      const status = await navigator.permissions.query({
+        name: 'periodic-background-sync',
+      });
+
+      if (status.state === 'granted') {
+        // Register periodic sync every 24 hours (can be less or more)
+        await registration.periodicSync.register('content-sync', {
+          minInterval: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
+        });
+        console.log('Periodic background sync registered');
+      } else {
+        console.log('Periodic background sync permission not granted');
+      }
+    } catch (error) {
+      console.error('Periodic background sync could not be registered', error);
+    }
+  });
+} else {
+  console.log('Periodic background sync is not supported in this browser.');
+}
+
 // -----------------------------
 // INIT
 // -----------------------------
