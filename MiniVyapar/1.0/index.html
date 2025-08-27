@@ -1,208 +1,1441 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Mini Vyapar</title>
-  <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
-  <link rel="apple-touch-icon" href="icon-180.png">
-  <link rel="icon" type="image/png" sizes="any" href="icons/icon-512.png">
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="manifest" href="manifest.json">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Vyapar</title>
+    <meta name="theme-color" content="#005acb">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Mini Vyapar">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <link rel="apple-touch-icon" href="/icons/icon-180.png">
+    <link rel="icon" type="image/png" sizes="any" href="/icons/icon-512.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
+    <!-- PDF Generation Library -->
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <!-- Excel Export Library -->
+    <script src="https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js"></script>
 </head>
 <body>
-  <div id="app">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo-container">
-        <img src="assets/logo.png" alt="Mini Vyapar Icon" class="logo-icon">
-        <img src="assets/only_text.png" alt="Mini Vyapar Text" class="logo-text-img">
-      </div>
-      <div class="header-actions">
-        <button id="btn-sync" class="btn-icon"><i class="ri-refresh-line"></i></button>
-        <button id="btn-settings" class="btn-icon"><i class="ri-settings-3-line"></i></button>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="content">
-      <!-- Dashboard Page -->
-      <section id="page-dashboard" class="page active">
-        <div class="container">
-          <!-- Summary Cards -->
-          <div class="card-grid">
-            <article class="card summary-card primary">
-              <div class="icon-wrapper"><i class="ri-hand-coin-line icon"></i></div>
-              <div class="summary-content">
-                <p class="label">Today's Sales</p>
-                <h3 class="value" id="dashboard-sales">Rs 0</h3>
-                <div class="trend"><i class="ri-arrow-up-s-line"></i> 12% from yesterday</div>
-              </div>
-            </article>
-            <article class="card summary-card warning">
-              <div class="icon-wrapper"><i class="ri-alert-line icon"></i></div>
-              <div class="summary-content">
-                <p class="label">Low Stock</p>
-                <h3 class="value" id="dashboard-alerts">0 items</h3>
-                <div class="trend">Check inventory</div>
-              </div>
-            </article>
-            <article class="card summary-card success">
-              <div class="icon-wrapper"><i class="ri-bank-card-line icon"></i></div>
-              <div class="summary-content">
-                <p class="label">Today's Expenses</p>
-                <h3 class="value" id="dashboard-expenses">Rs 0</h3>
-                <div class="trend"><i class="ri-arrow-down-s-line"></i> 5% from yesterday</div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Quick Items -->
-          <section class="quick-items-section">
-            <div class="section-header">
-              <h4>Quick Sell</h4>
-              <button id="btn-view-all" class="btn-link">View All</button>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Mini Vyapar Icon" class="logo-icon">
+                    <img src="assets/only_text.png" alt="Mini Vyapar Text" class="logo-text-img">
+                  </div>
+                <div class="header-actions">
+                    <button class="menu-btn" onclick="showSettings()" title="Settings">
+                        <span class="material-icons">settings</span>
+                    </button>
+                </div>
             </div>
-            <div id="quick-items-grid" class="quick-items-grid"></div>
-          </section>
+        </header>
+        
+        <!-- Main Layout -->
+        <main class="main">            
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Dashboard Page -->
+                <div class="page active" id="dashboard">
+                    <!-- Dashboard Dropdown Button -->
+                    <div class="dashboard-header">
+                        <button class="dashboard-toggle-btn" onclick="toggleDashboard()">
+                            <span class="dashboard-toggle-text" data-translate="Dashboard">Dashboard</span>
+                            <span class="dashboard-toggle-icon material-icons" id="dashboardToggleIcon">expand_more</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Dashboard Cards -->
+                    <div class="dashboard-cards" id="dashboardCards">
+                        <div class="card">
+                            <div class="card-title" data-translate="Today's Sales">Today's Sales</div>
+                            <div class="card-value" id="todaySalesCard">Rs 0</div>
+                            <div class="card-subtitle" id="todayTransactionsCard">0 transactions</div>
+                        </div>
+                        <div class="card clickable-card" onclick="showLowStockItems()">
+                            <div class="card-title" data-translate="Inventory Alerts">Inventory Alerts</div>
+                            <div class="card-value" id="inventoryAlertsCard">0</div>
+                            <div class="card-subtitle" data-translate="Low stock items">Low stock items</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title" data-translate="Today's Expenses">Today's Expenses</div>
+                            <div class="card-value" id="todayExpensesCard">Rs 0</div>
+                            <div class="card-subtitle" id="todayExpenseEntriesCard">0 entries</div>
+                        </div>
+                        <div class="card clickable-card" onclick="showCreditSummary()">
+                            <div class="card-title" data-translate="Credit Outstanding">Credit Outstanding</div>
+                            <div class="card-value" id="creditOutstandingCard">Rs 0</div>
+                            <div class="card-subtitle" id="activeCreditEntriesCard">0 active</div>
+                        </div>
+                        <div class="card clickable-card" onclick="showProfitAnalysis()">
+                            <div class="card-title" data-translate="Product Profit">Product Profit</div>
+                            <div class="card-value" id="productProfitCard">Rs 0</div>
+                            <div class="card-subtitle" id="profitMarginCard">0% margin</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sales Overview Chart -->
+                    <div class="sales-overview-wireframe">
+                        <div class="overview-header">
+                            <span class="overview-title" data-translate="Sale Summary">Sales Overview</span>
+                            <div class="overview-controls">
+                                <div class="toggle-buttons">
+                                    <button class="toggle-btn active" data-range="today" onclick="switchSalesView('today')" data-translate="Today">Today</button>
+                                    <button class="toggle-btn" data-range="week" onclick="switchSalesView('week')" data-translate="This Week">Week</button>
+                                    <button class="toggle-btn" data-range="month" onclick="switchSalesView('month')" data-translate="This Month">Month</button>
+                                </div>
+                                <button class="download-chart-btn" onclick="downloadChartReport()">
+                                    <span class="material-icons">bar_chart</span> Download
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="salesWireframeChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Item Bar -->
+                    <div class="quick-items-section">
+                        <div class="section-header">
+                            <div class="section-title">Quick Item Bar</div>
+                            <div class="expand-btn material-icons" id="expandBtn">expand_more</div>
+                        </div>
+                        <div class="quick-items-grid" id="quickItemsGrid">
+                            <!-- Quick items will be populated dynamically from inventory -->
+                            <div class="no-quick-items" id="noQuickItems">
+                                <div class="no-quick-items-text">No products in inventory</div>
+                                <div class="no-quick-items-subtitle">Add products to inventory to see them here</div>
+                            </div>
+                        </div>
+                        <div class="gesture-info">
+                            <strong>Interactions:</strong> Tap = Select | Swipe Right (+1) | Swipe Up (+5) | Swipe Left (-1) | Swipe Down (-5)
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Transactions Section -->
+                    <div class="recent-transactions-section">
+                        <div class="section-header">
+                            <div class="section-title">Recent Transactions</div>
+                            <button class="clear-history-btn" onclick="clearTransactionHistory()">
+                                <span class="material-icons">delete</span> Clear
+                            </button>
+                        </div>
+                        <div class="transactions-container" id="transactionsContainer">
+                            <div class="no-transactions" id="noTransactions">
+                                <div class="no-transactions-icon material-icons">description</div>
+                                <div class="no-transactions-text">No recent transactions</div>
+                                <div class="no-transactions-subtext">Complete a sale to see transactions here</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- All Transaction History Button -->
+                    <div class="transaction-history-section">
+                        <button class="view-all-transactions-btn" onclick="openTransactionHistoryModal()">
+                            <div class="btn-icon material-icons">analytics</div>
+                            <div class="btn-content">
+                                <div class="btn-title" data-translate="All Transaction History">All Transaction History</div>
+                                <div class="btn-subtitle" data-translate="View complete financial overview">View complete financial overview</div>
+                            </div>
+                            <div class="btn-arrow material-icons">chevron_right</div>
+                        </button>
+                    </div>
+                    
+                    <!-- Toast Notification -->
+                    <div class="toast" id="toast"></div>
+                    
+                    <!-- Cart Bottom Bar -->
+                    <div class="cart-bottom-bar" id="cartBottomBar">
+                        <div class="cart-header" id="cartHeader">
+                            <div class="cart-title">CART</div>
+                            <div class="cart-total" id="cartTotal">Total: Rs 0</div>
+                        </div>
+                        <div class="cart-content">
+                            <div class="cart-items" id="cartItems">
+                                <!-- Cart items will be dynamically added here -->
+                            </div>
+                            <div class="cart-actions">
+                                <div class="btn btn-primary" id="checkoutBtn">Checkout</div>
+                                <div class="btn btn-secondary" id="clearCartBtn">
+                                    <span class="material-icons">delete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div></div>
+                
+                <!-- Sales Page (New Sale) -->
+                <div class="page" id="sales">
+                    <div class="new-sale-page">
+                        <!-- Header -->
+                        <div class="new-sale-header">
+                            <button class="back-btn" onclick="showDashboard()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="New Sale">New Sale</h2>
+                            <div></div>
+                        </div>
+                        
+                        <!-- Filters and Search -->
+                        <div class="filters-section">
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-filter="favorites" onclick="applySaleFilter('favorites')">
+                                    <span class="material-icons">star</span> <span data-translate="Favorites">Favorites</span>
+                                </button>
+                                <button class="filter-tab" data-filter="topSellers" onclick="applySaleFilter('topSellers')">
+                                    <span class="material-icons">local_fire_department</span> <span data-translate="Top Sellers">Top Sellers</span>
+                                </button>
+                                <button class="filter-tab" data-filter="allProducts" onclick="applySaleFilter('allProducts')">
+                                    <span class="material-icons">inventory_2</span> <span data-translate="All Products">All Products</span>
+                                </button>
+                            </div>
+                            <div class="search-bar">
+                                <span class="search-icon material-icons">search</span>
+                                <input type="text" placeholder="Search products..." id="productSearch" data-translate="Search products...">
+                            </div>
+                        </div>
+                        
+                        <!-- Product Grid -->
+                        <div class="product-grid" id="productGrid">
+                            <!-- Products will be populated here -->
+                        </div>
+                        
+                        <!-- Wholesale/Cart Section -->
+                        <div class="sale-cart-section" id="saleCartSection" style="display: none;">
+                            <div class="sale-cart-header">
+                                <div class="cart-drag-handle"></div>
+                                <span class="cart-title" data-translate="Selected Items">Selected Items</span>
+                                <button class="cart-clear" onclick="clearSaleCart()">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </div>
+                            <div class="sale-cart-items" id="saleCartItems">
+                                <!-- Cart items will be populated here -->
+                            </div>
+                            <div class="sale-cart-footer">
+                                <div class="sale-cart-total">
+                                    <span data-translate="Total">Total</span>: <span id="saleCartTotal">Rs 0.00</span>
+                                </div>
+                                <button class="sale-checkout-btn" onclick="saleCheckout()" data-translate="Checkout">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inventory Page -->
+                <div class="page" id="inventory">
+                    <div class="inventory-page">
+                        <!-- Header -->
+                        <div class="inventory-header">
+                            <button class="back-btn" onclick="showDashboard()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="Inventory">Inventory</h2>
+                            <div class="header-actions">
+                                <button class="header-icon" onclick="toggleInventorySearch()">
+                                    <span class="material-icons">search</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="inventory-search" id="inventorySearch" style="display: none;">
+                            <input type="text" placeholder="Search by name, code, or barcode..." id="inventorySearchInput" data-translate="Search by name, code, or barcode...">
+                        </div>
+                        
+                        <!-- Filter Tabs - Always Visible -->
+                        <div class="inventory-filters" id="inventoryFilters">
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-filter="all" data-translate="All Products" onclick="filterInventoryByType('all')">All Products</button>
+                                <button class="filter-tab" data-filter="lowStock" data-translate="Low Stock" onclick="filterInventoryByType('lowStock')">Low Stock</button>
+                                <button class="filter-tab" data-filter="categories" data-translate="Categories" onclick="toggleCategoryDropdown()">Categories <span class="material-icons">expand_more</span></button>
+                            </div>
+                            
+                            <!-- Categories Dropdown -->
+                            <div class="categories-dropdown" id="categoriesDropdown" style="display: none;">
+                                <div class="category-list" id="categoryList">
+                                    <!-- Categories will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- View Toggle -->
+                        <div class="view-controls">
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="list" onclick="changeInventoryView('list')">
+                                    <span class="material-icons">view_list</span> <span data-translate="List">List</span>
+                                </button>
+                                <button class="view-btn" data-view="grid" onclick="changeInventoryView('grid')">
+                                    <span class="material-icons">grid_view</span> <span data-translate="Grid">Grid</span>
+                                </button>
+                            </div>
+                            <button class="add-product-btn" onclick="openAddProductForm()" data-translate="Add Product">
+                                <span class="material-icons">add</span> Add Product
+                            </button>
+                        </div>
+                        
+                        <!-- Current Filter Display -->
+                        <div class="current-filter" id="currentFilter" style="display: none;">
+                            <span id="currentFilterText">Showing all products</span>
+                            <button onclick="clearInventoryFilter()" class="clear-filter-btn">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Inventory List -->
+                        <div class="inventory-content">
+                            <div class="inventory-list" id="inventoryList">
+                                <!-- Products will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expenses Page -->
+                <div class="page" id="expenses">
+                    <div class="expenses-page">
+                        <!-- Header -->
+                        <div class="expenses-header">
+                            <button class="back-btn" onclick="showDashboard()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="Expenses & Credit">Expenses & Credit</h2>
+                            <div></div>
+                        </div>
+                        
+                        <!-- Tab Navigation -->
+                        <div class="expenses-tabs">
+                            <button class="tab-btn active" data-tab="expenses" onclick="switchExpensesTab('expenses')">
+                                <span class="material-icons">payments</span>
+                                <span data-translate="Expenses">Expenses</span>
+                            </button>
+                            <button class="tab-btn" data-tab="credit" onclick="switchExpensesTab('credit')">
+                                <span class="material-icons">credit_card</span>
+                                <span data-translate="Credit">Credit</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Expenses Tab Content -->
+                        <div class="tab-content active" id="expensesTab">
+                        <div class="expense-summary">
+                            <div class="summary-card">
+                                <div class="summary-label" data-translate="Today's Expenses">Today's Expenses</div>
+                                <div class="summary-amount" id="todayExpenses">Rs 0</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-label" data-translate="This Month">This Month's Expenses</div>
+                                <div class="summary-amount" id="monthExpenses">Rs 0</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Expense Button -->
+                        <div class="add-expense-section">
+                            <button class="add-expense-btn" onclick="openAddExpenseForm()" data-translate="Add Expense">
+                                <span class="material-icons">add</span> Add Expense
+                            </button>
+                        </div>
+                        
+                        <!-- Expenses List -->
+                        <div class="expenses-content">
+                            <div class="expenses-list" id="expensesList">
+                                <!-- Expenses will be populated here -->
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <!-- Credit Tab Content -->
+                        <div class="tab-content" id="creditTab">
+                            <!-- Credit Summary -->
+                            <div class="credit-summary">
+                                <div class="summary-card">
+                                    <div class="summary-label" data-translate="Active Credits">Active Credits</div>
+                                    <div class="summary-amount" id="activeCredits">Rs 0</div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-label" data-translate="Total Outstanding">Total Outstanding</div>
+                                    <div class="summary-amount" id="totalOutstanding">Rs 0</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Add Credit Button -->
+                            <div class="add-credit-section">
+                                <button class="add-credit-btn" onclick="openAddCreditForm()" data-translate="Add Credit">
+                                    <span class="material-icons">add</span> Add Credit
+                                </button>
+                            </div>
+                            
+                            <!-- Credit List -->
+                            <div class="credit-content">
+                                <div class="credit-list" id="creditList">
+                                    <!-- Credit entries will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- All Transactions Page -->
+                <div class="page" id="transactions">
+                    <div class="transactions-page">
+                        <!-- Header -->
+                        <div class="transactions-header">
+                            <button class="back-btn" onclick="showDashboard()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="All Transactions">All Transactions</h2>
+                            <div class="header-actions">
+                                <button class="filter-btn" onclick="openTransactionsFilter()">
+                                    <span class="material-icons">filter_list</span>
+                                </button>
+                                <button class="export-btn" onclick="exportTransactions()">
+                                    <span class="material-icons">file_download</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Financial Summary -->
+                        <div class="financial-summary">
+                            <div class="summary-row">
+                                <div class="summary-card revenue">
+                                    <div class="summary-icon material-icons">payments</div>
+                                    <div class="summary-info">
+                                        <div class="summary-label" data-translate="Total Revenue">Total Revenue</div>
+                                        <div class="summary-amount" id="totalRevenue">Rs 0</div>
+                                    </div>
+                                </div>
+                                <div class="summary-card expenses">
+                                    <div class="summary-icon material-icons">receipt</div>
+                                    <div class="summary-info">
+                                        <div class="summary-label" data-translate="Total Expenses">Total Expenses</div>
+                                        <div class="summary-amount" id="totalExpenses">Rs 0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-card profit">
+                                    <div class="summary-icon material-icons">trending_up</div>
+                                    <div class="summary-info">
+                                        <div class="summary-label" data-translate="Net Profit">Net Profit</div>
+                                        <div class="summary-amount" id="netProfit">Rs 0</div>
+                                    </div>
+                                </div>
+                                <div class="summary-card credit">
+                                    <div class="summary-icon material-icons">account_balance</div>
+                                    <div class="summary-info">
+                                        <div class="summary-label" data-translate="Outstanding Credit">Outstanding Credit</div>
+                                        <div class="summary-amount" id="outstandingCredit">Rs 0</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Period Filter -->
+                        <div class="period-filter">
+                            <button class="period-btn active" data-period="today" onclick="filterTransactionsByPeriod('today')" data-translate="Today">Today</button>
+                            <button class="period-btn" data-period="week" onclick="filterTransactionsByPeriod('week')" data-translate="This Week">This Week</button>
+                            <button class="period-btn" data-period="month" onclick="filterTransactionsByPeriod('month')" data-translate="This Month">This Month</button>
+                            <button class="period-btn" data-period="all" onclick="filterTransactionsByPeriod('all')" data-translate="All Time">All Time</button>
+                        </div>
+                        
+                        <!-- Transaction Type Tabs -->
+                        <div class="transaction-tabs">
+                            <button class="tab-btn active" data-type="all" onclick="filterTransactionsByType('all')" data-translate="All">All</button>
+                            <button class="tab-btn" data-type="sales" onclick="filterTransactionsByType('sales')" data-translate="Sales">Sales</button>
+                            <button class="tab-btn" data-type="expenses" onclick="filterTransactionsByType('expenses')" data-translate="Expenses">Expenses</button>
+                            <button class="tab-btn" data-type="credit" onclick="filterTransactionsByType('credit')" data-translate="Credit">Credit</button>
+                        </div>
+                        
+                        <!-- Transactions List -->
+                        <div class="transactions-content">
+                            <div class="transactions-list" id="transactionsList">
+                                <!-- Transactions will be populated here -->
+                            </div>
+                            
+                            <!-- Empty State -->
+                            <div class="no-transactions" id="noTransactions" style="display: none;">
+                                <div class="no-transactions-icon material-icons">analytics</div>
+                                <h3 data-translate="No Transactions Found">No Transactions Found</h3>
+                                <p data-translate="Start making sales or adding expenses to see your transaction history.">Start making sales or adding expenses to see your transaction history.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Page -->
+                <div class="page" id="settings">
+                    <div class="settings-page">
+                        <!-- Header -->
+                        <div class="settings-header">
+                            <button class="back-btn" onclick="showDashboard()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="Settings">Settings</h2>
+                            <div></div>
+                        </div>
+                        
+                        <!-- Settings Categories -->
+                        <div class="settings-categories">
+                            <!-- Language Settings -->
+                            <div class="settings-category" onclick="openLanguageSettings()">
+                                <div class="category-icon material-icons">language</div>
+                                <div class="category-info">
+                                    <h3 data-translate="Language">Language</h3>
+                                    <p data-translate="English / नेपाली">English / नेपाली</p>
+                                </div>
+                                <div class="category-arrow material-icons">chevron_right</div>
+                            </div>
+                            
+                            <!-- Theme Settings -->
+                            <div class="settings-category" onclick="openThemeSettings()">
+                                <div class="category-icon material-icons">palette</div>
+                                <div class="category-info">
+                                    <h3 data-translate="Theme">Theme</h3>
+                                    <p data-translate="Light / Dark mode">Light / Dark mode</p>
+                                </div>
+                                <div class="category-arrow material-icons">chevron_right</div>
+                            </div>
+                            
+                            <!-- Shop Features -->
+                            <div class="settings-category" onclick="openShopSettings()">
+                                <div class="category-icon material-icons">store</div>
+                                <div class="category-info">
+                                    <h3 data-translate="Shop Features">Shop Features</h3>
+                                    <p data-translate="Store info, backup & receipts">Store info, backup & receipts</p>
+                                </div>
+                                <div class="category-arrow material-icons">chevron_right</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-          <!-- Recent Transactions -->
-          <section class="activities-section">
-            <div class="section-header">
-              <h4>Recent Transactions</h4>
+                <!-- Shop Settings Sub-page -->
+                <div class="page" id="shopSettings">
+                    <div class="settings-page">
+                        <!-- Header -->
+                        <div class="settings-header">
+                            <button class="back-btn" onclick="backToMainSettings()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="Shop Features">Shop Features</h2>
+                            <div></div>
+                        </div>
+                        
+                        <!-- Settings Content -->
+                        <div class="settings-content">
+                            <!-- Shop Information -->
+                            <div class="settings-section">
+                                <h3 data-translate="Shop Information">Shop Information</h3>
+                                <div class="setting-item">
+                                    <label for="shopName" data-translate="Shop Name">Shop Name</label>
+                                    <input type="text" id="shopName" placeholder="Enter your shop name" data-translate="Enter your shop name" value="Mini Vyapar Store">
+                                </div>
+                                <div class="setting-item">
+                                    <label for="shopAddress" data-translate="Address">Address</label>
+                                    <textarea id="shopAddress" placeholder="Enter your shop address" data-translate="Enter your shop address" rows="3"></textarea>
+                                </div>
+                                <div class="setting-item">
+                                    <label for="shopPhone" data-translate="Phone Number">Phone Number</label>
+                                    <input type="tel" id="shopPhone" placeholder="Enter phone number" data-translate="Enter phone number">
+                                </div>
+                            </div>
+                            
+                            <!-- Backup & Restore -->
+                            <div class="settings-section">
+                                <h3 data-translate="Backup & Restore">Backup & Restore</h3>
+                                <div class="backup-controls">
+                                    <button class="backup-btn" id="backupNowBtn" onclick="backupToExcel()" data-translate="Backup Now (Excel)">
+                                        <span class="material-icons">backup</span> Backup Now (Excel)
+                                    </button>
+                                    <div class="backup-info">
+                                        <small><span data-translate="Last backup">Last backup</span>: <span id="lastBackupDate" data-translate="Never">Never</span></small>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-item">
+                                    <label for="backupFrequency" data-translate="Auto Backup Frequency">Auto Backup Frequency</label>
+                                    <select id="backupFrequency">
+                                        <option value="manual" data-translate="Manual Only">Manual Only</option>
+                                        <option value="daily" data-translate="Daily">Daily</option>
+                                        <option value="weekly" selected data-translate="Weekly">Weekly</option>
+                                        <option value="monthly" data-translate="Monthly">Monthly</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" id="backupNotifications" checked>
+                                        <span data-translate="Enable backup reminder notifications">Enable backup reminder notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Receipt Settings -->
+                            <div class="settings-section">
+                                <h3 data-translate="Receipt Settings">Receipt Settings</h3>
+                                <div class="setting-item">
+                                    <label>
+                                        <input type="checkbox" id="autoGenerateReceipts" checked>
+                                        <span data-translate="Auto-generate receipts after sale">Auto-generate receipts after sale</span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <label for="receiptFooter" data-translate="Receipt Footer Message">Receipt Footer Message</label>
+                                    <input type="text" id="receiptFooter" placeholder="Thank you for your business!" data-translate="Thank you for your business!" value="Thank you for your business!">
+                                </div>
+                            </div>
+                            
+                            <!-- Data Management -->
+                            <div class="settings-section">
+                                <h3 data-translate="Data Management">Data Management</h3>
+                                <div class="data-controls">
+                                    <button class="settings-btn secondary" onclick="exportAllData()" data-translate="Export All Data">
+                                        <span class="material-icons">file_download</span> Export All Data
+                                    </button>
+                                    <button class="settings-btn danger" onclick="showResetConfirmation()" data-translate="Reset All Data">
+                                        <span class="material-icons">delete_forever</span> Reset All Data
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Settings Page -->
+                <div class="page" id="languageSettings">
+                    <div class="settings-page">
+                        <!-- Header -->
+                        <div class="settings-header">
+                            <button class="back-btn" onclick="backToMainSettings()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="Language Settings">Language Settings</h2>
+                            <div></div>
+                        </div>
+                        
+                        <!-- Language Content -->
+                        <div class="settings-content">
+                            <div class="settings-section">
+                                <h3 data-translate="Select Language">Select Language</h3>
+                                <div class="language-options">
+                                    <div class="language-option active" data-lang="en">
+                                        <div class="language-flag material-icons">language</div>
+                                        <div class="language-info">
+                                            <h4 data-translate="English">English</h4>
+                                            <p data-translate="Default language">Default language</p>
+                                        </div>
+                                        <div class="language-selected material-icons">check</div>
+                                    </div>
+                                    <div class="language-option" data-lang="ne">
+                                        <div class="language-flag material-icons">public</div>
+                                        <div class="language-info">
+                                            <h4 data-translate="नेपाली">नेपाली</h4>
+                                            <p data-translate="Nepali language">Nepali language</p>
+                                        </div>
+                                        <div class="language-selected material-icons">check</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Settings Page -->
+                <div class="page" id="themeSettings">
+                    <div class="settings-page">
+                        <!-- Header -->
+                        <div class="settings-header">
+                            <button class="back-btn" onclick="backToMainSettings()">
+                                <span class="material-icons">arrow_back</span>
+                            </button>
+                            <h2 data-translate="Theme Settings">Theme Settings</h2>
+                            <div></div>
+                        </div>
+                        
+                        <!-- Theme Content -->
+                        <div class="settings-content">
+                            <div class="settings-section">
+                                <h3 data-translate="Choose Theme">Choose Theme</h3>
+                                <div class="theme-options">
+                                    <div class="theme-option active" data-theme="light">
+                                        <div class="theme-preview light-preview">
+                                            <div class="preview-header"></div>
+                                            <div class="preview-content"></div>
+                                        </div>
+                                        <div class="theme-info">
+                                            <h4 data-translate="Light Mode">Light Mode</h4>
+                                            <p data-translate="Bright and clean interface">Bright and clean interface</p>
+                                        </div>
+                                        <div class="theme-selected material-icons">check</div>
+                                    </div>
+                                    <div class="theme-option" data-theme="dark">
+                                        <div class="theme-preview dark-preview">
+                                            <div class="preview-header"></div>
+                                            <div class="preview-content"></div>
+                                        </div>
+                                        <div class="theme-info">
+                                            <h4 data-translate="Dark Mode">Dark Mode</h4>
+                                            <p data-translate="Easy on the eyes">Easy on the eyes</p>
+                                        </div>
+                                        <div class="theme-selected material-icons">check</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul id="activity-feed" class="activity-feed"></ul>
-            <div id="empty-activity" class="empty-state">
-              <i class="ri-time-line placeholder-icon"></i>
-              <p>No transactions today</p>
+        </main>
+        
+        <!-- Bottom Navigation (Mobile) -->
+        
+        <!-- Product Card Modal -->
+        <div class="product-card-modal" id="productCardModal" style="display: none;">
+            <div class="product-card-overlay" onclick="closeProductCard()"></div>
+            <div class="product-card-content">
+                <div class="product-card-header">
+                    <h3 id="productCardTitle">Product Name</h3>
+                    <button class="product-card-close" onclick="closeProductCard()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-image" id="productCardImage">
+                        <span class="material-icons">inventory_2</span>
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-card-price" id="productCardPrice">Rs 10</div>
+                        <div class="product-card-stock" id="productCardStock">Stock: 50</div>
+                    </div>
+                    <div class="product-card-actions">
+                        <div class="product-card-gestures">
+                            <div class="product-card-interactive" id="productCardInteractive">
+                                <div class="interactive-zone">
+                                    <div class="zone-text">Touch/Swipe Here</div>
+                                    <div class="quantity-display" id="quantityDisplay">Qty: 0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </section>
         </div>
-      </section>
-
-      <!-- Sales Page -->
-      <section id="page-sales" class="page">
-        <div class="container">
-          <header class="new-sale-header">
-            <button id="btn-back-dashboard" class="btn-icon back-button"><i class="ri-arrow-left-line"></i></button>
-            <h2 class="page-title">New Sale</h2>
-            <div class="tabs">
-              <button class="tab active" data-tab="favorites">Favorites</button>
-              <button class="tab" data-tab="top-sellers">Top Sellers</button>
-              <button class="tab" data-tab="all">All Products</button>
+        
+        <!-- Add Product Modal -->
+        <div class="modal" id="addProductModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeAddProductForm()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="Add Product">Add Product</h3>
+                    <button class="modal-close" onclick="closeAddProductForm()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label data-translate="Product Name">Product Name *</label>
+                            <input type="text" id="productName" required data-translate="Enter product name" placeholder="Enter product name">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Product Icon">Product Icon</label>
+                            <div class="icon-selector">
+                                <div class="icon-input-container">
+                                    <input type="text" id="productIcon" class="icon-input" value="inventory_2" readonly placeholder="Select an icon">
+                                    <button type="button" class="icon-search-btn" onclick="openAdvancedIconPicker()" data-translate="Browse">
+                                        <span class="material-icons">search</span> Browse Icons
+                                    </button>
+                                </div>
+                                <div class="icon-preview" id="iconPreview">
+                                    <span class="material-icons">inventory_2</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Advanced Icon Picker Modal -->
+                            <div id="advancedIconPicker" class="icon-picker-modal" style="display: none;">
+                                <div class="icon-picker-content">
+                                    <div class="icon-picker-header">
+                                        <h3 data-translate="Choose emoji">Choose Product Icon</h3>
+                                        <button type="button" class="close-icon-picker" onclick="closeAdvancedIconPicker()">
+                                            <span class="material-icons">close</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Search Bar -->
+                                    <div class="icon-search-container">
+                                        <input type="text" id="iconSearchInput" placeholder="Search for items like 'noodles', 'biscuits', 'milk'..." class="icon-search-input">
+                                        <div class="search-suggestions" id="searchSuggestions"></div>
+                                    </div>
+                                    
+                                    <!-- Category Tabs -->
+                                    <div class="icon-category-tabs">
+                                        <button class="icon-cat-tab active" data-category="food" onclick="showIconCategory('food')">
+                                            <span class="material-icons">restaurant</span> Food
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="drinks" onclick="showIconCategory('drinks')">
+                                            <span class="material-icons">local_drink</span> Drinks
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="snacks" onclick="showIconCategory('snacks')">
+                                            <span class="material-icons">cookie</span> Snacks
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="household" onclick="showIconCategory('household')">
+                                            <span class="material-icons">home</span> Home
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="personal" onclick="showIconCategory('personal')">
+                                            <span class="material-icons">spa</span> Care
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="electronics" onclick="showIconCategory('electronics')">
+                                            <span class="material-icons">devices</span> Tech
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="stationery" onclick="showIconCategory('stationery')">
+                                            <span class="material-icons">description</span> Office
+                                        </button>
+                                        <button class="icon-cat-tab" data-category="medicine" onclick="showIconCategory('medicine')">
+                                            <span class="material-icons">medication</span> Health
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Icon Grid -->
+                                    <div class="icon-grid-container">
+                                        <div id="iconGrid" class="icon-grid"></div>
+                                    </div>
+                                    
+                                    <!-- Quick Actions -->
+                                    <div class="icon-quick-actions">
+                                        <button type="button" onclick="selectRandomIcon()" class="random-icon-btn">
+                                            <span class="material-icons">casino</span> Random
+                                        </button>
+                                        <button type="button" onclick="selectIconByName()" class="name-based-icon-btn">
+                                            <span class="material-icons">auto_awesome</span> Auto-suggest
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Category">Category</label>
+                            <select id="productCategory">   
+                                <option value="food">Food & Beverages</option>
+                                <option value="dairy">Dairy Products</option>
+                                <option value="bakery">Bakery Items</option>
+                                <option value="grains">Grains & Cereals</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="poultry">Poultry & Meat</option>
+                                <option value="essentials">Daily Essentials</option>
+                                <option value="household">Household Items</option>
+                                <option value="personal">Personal Care</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-translate="Cost Price">Cost Price</label>
+                                <input type="number" id="costPrice" min="0" step="0.01" data-translate="Enter cost price" placeholder="Enter cost price">
+                            </div>
+                            <div class="form-group">
+                                <label data-translate="Selling Price">Selling Price *</label>
+                                <input type="number" id="sellingPrice" required min="0" step="0.01" data-translate="Enter selling price" placeholder="Enter selling price">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Stock">Initial Stock *</label>
+                            <input type="number" id="initialStock" required min="0" data-translate="Enter stock quantity" placeholder="Enter stock quantity">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Supplier">Supplier</label>
+                            <input type="text" id="supplier" data-translate="Enter supplier name" placeholder="Enter supplier name">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Product Code">Product Code/Barcode</label>
+                            <input type="text" id="productCode" data-translate="Enter product code" placeholder="Enter product code">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="closeAddProductForm()" data-translate="Cancel">Cancel</button>
+                            <button type="submit" data-translate="Save Product">Save Product</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="search-wrapper">
-              <i class="ri-search-line search-icon"></i>
-              <input type="text" id="search-products" class="search-input" placeholder="Search products..."/>
-            </div>
-          </header>
-          <main class="product-grid" id="product-grid"></main>
-          <!-- Cart Bottom Bar -->
-          <div id="cart-bottom-bar" class="cart-bottom-bar" data-state="hidden">
-            <div id="cart-header" class="cart-header">
-              <h5>Cart <span id="cart-count">(0)</span></h5>
-              <span id="cart-total">Rs 0</span>
-            </div>
-            <div id="cart-body" class="cart-body">
-              <div id="cart-items" class="cart-items-list"></div>
-              <div class="cart-summary">
-                <div>Subtotal: <span id="cart-subtotal">Rs 0</span></div>
-                <div>Tax (13%): <span id="cart-tax">Rs 0</span></div>
-                <div>Total: <strong id="cart-grand-total">Rs 0</strong></div>
-              </div>
-              <div class="cart-actions">
-                <button id="btn-checkout" class="btn-primary">Checkout</button>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
-
-      <!-- Inventory Page -->
-      <section id="page-inventory" class="page">
-        <div class="container">
-          <div class="section-header">
-            <h3>Inventory</h3>
-            <button id="btn-add-product" class="btn-primary">+ Add Product</button>
-          </div>
-          <div id="inventory-list"></div>
+        
+        <!-- Add Expense Modal -->
+        <div class="modal" id="addExpenseModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeAddExpenseForm()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="Add Expense">Add Expense</h3>
+                    <button class="modal-close" onclick="closeAddExpenseForm()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addExpenseForm">
+                        <div class="form-group">
+                            <label data-translate="Expense Type">Expense Type *</label>
+                            <select id="expenseType">
+                                <option value="rent" data-translate="Rent">Rent</option>
+                                <option value="electricity">Electricity</option>
+                                <option value="supplier">Supplier Payment</option>
+                                <option value="transport">Transport</option>
+                                <option value="maintenance" data-translate="Maintenance">Maintenance</option>
+                                <option value="other" data-translate="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Amount">Amount *</label>
+                            <input type="number" id="expenseAmount" required min="0" step="0.01" data-translate="Enter amount" placeholder="Enter amount">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Date">Date</label>
+                            <input type="date" id="expenseDate">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Notes">Notes</label>
+                            <textarea id="expenseNotes" rows="3" placeholder="Optional description..." data-translate="Enter notes"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="closeAddExpenseForm()" data-translate="Cancel">Cancel</button>
+                            <button type="submit" data-translate="Save Expense">Save Expense</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </section>
-
-      <!-- Expenses Page -->
-      <section id="page-expenses" class="page">
-        <div class="container">
-          <div class="section-header">
-            <h3>Expenses</h3>
-            <button id="btn-add-expense" class="btn-primary">+ Add Expense</button>
-          </div>
-          <div id="expenses-list"></div>
+        
+        <!-- Add Credit Modal -->
+        <div class="modal" id="addCreditModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeAddCreditForm()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="Add Credit">Add Credit</h3>
+                    <button class="modal-close" onclick="closeAddCreditForm()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCreditForm">
+                        <div class="form-group">
+                            <label data-translate="Customer Name">Customer Name *</label>
+                            <input type="text" id="customerName" required placeholder="Enter customer name" data-translate="Enter customer name">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Credit Amount">Credit Amount *</label>
+                            <input type="number" id="creditAmount" required min="0" step="0.01" placeholder="Enter amount" data-translate="Enter amount">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Date">Date</label>
+                            <input type="date" id="creditDate">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Customer Phone">Customer Phone</label>
+                            <input type="tel" id="customerPhone" placeholder="Enter phone number" data-translate="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label data-translate="Notes">Notes</label>
+                            <textarea id="creditNotes" rows="3" placeholder="Optional notes..." data-translate="Enter notes"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="closeAddCreditForm()" data-translate="Cancel">Cancel</button>
+                            <button type="submit" data-translate="Save Credit">Save Credit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </section>
-    </main>
+        
+        <!-- Edit Product Modal -->
+        <div class="modal" id="editProductModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeEditProductForm()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Edit Product</h3>
+                    <button class="modal-close" onclick="closeEditProductForm()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="edit-product-info">
+                        <h4 id="editProductName">Product Name</h4>
+                        <p id="editProductDetails">Current details</p>
+                    </div>
+                    
+                    <!-- Quick Action Buttons -->
+                    <div class="edit-actions">
+                        <button class="edit-action-btn stock-btn" onclick="showStockUpdate()">
+                            <span class="btn-icon material-icons">inventory</span>
+                            <span class="btn-text">Update Stock</span>
+                        </button>
+                        <button class="edit-action-btn price-btn" onclick="showPriceUpdate()">
+                            <span class="btn-icon material-icons">paid</span>
+                            <span class="btn-text">Update Price</span>
+                        </button>
+                        <button class="edit-action-btn full-btn" onclick="showFullEdit()">
+                            <span class="btn-icon material-icons">edit</span>
+                            <span class="btn-text">Full Edit</span>
+                        </button>
+                        <button class="edit-action-btn danger-btn" onclick="deleteProduct()">
+                            <span class="btn-icon material-icons">delete</span>
+                            <span class="btn-text">Delete</span>
+                        </button>
+                    </div>
 
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav">
-      <button class="nav-item active" data-page="dashboard">
-        <i class="ri-home-5-line"></i>
-        <span>Home</span>
-      </button>
-      <button class="nav-item" data-page="sales">
-        <i class="ri-line-chart-line"></i>
-        <span>Sales</span>
-      </button>
-      <button class="nav-item" data-page="inventory">
-        <i class="ri-box-3-line"></i>
-        <span>Inventory</span>
-      </button>
-      <button class="nav-item" data-page="expenses">
-        <i class="ri-bank-card-line"></i>
-        <span>Expenses</span>
-      </button>
-    </nav>
+                    <!-- Stock Update Form -->
+                    <div id="stockUpdateForm" class="edit-form" style="display: none;">
+                        <h4><span class="material-icons">inventory</span> Update Stock</h4>
+                        <div class="form-group">
+                            <label>Stock Adjustment</label>
+                            <div class="stock-controls">
+                                <button type="button" onclick="adjustStock(-10)">-10</button>
+                                <button type="button" onclick="adjustStock(-1)">-1</button>
+                                <input type="number" id="stockAdjustment" value="0" placeholder="Enter adjustment">
+                                <button type="button" onclick="adjustStock(1)">+1</button>
+                                <button type="button" onclick="adjustStock(10)">+10</button>
+                            </div>
+                            <div class="stock-info">
+                                <p>Current Stock: <strong><span id="currentStock">0</span></strong></p>
+                                <p>New Stock: <strong><span id="newStock">0</span></strong></p>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="hideAllForms()">Cancel</button>
+                            <button type="button" onclick="saveStockUpdate()" class="btn-primary">Save Stock</button>
+                        </div>
+                    </div>
 
-    <!-- Floating Action Button -->
-    <button id="fab-add-sale" class="fab">
-      <i class="ri-add-line"></i>
-    </button>
+                    <!-- Price Update Form -->
+                    <div id="priceUpdateForm" class="edit-form" style="display: none;">
+                        <h4><span class="material-icons">paid</span> Update Prices</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Cost Price</label>
+                                <input type="number" id="newCostPrice" min="0" step="0.01" placeholder="Enter cost price">
+                                <small>Price you pay to buy this product</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Selling Price</label>
+                                <input type="number" id="newSellingPrice" min="0" step="0.01" placeholder="Enter selling price">
+                                <small>Price you sell to customers</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Profit Calculator -->
+                        <div class="profit-calculator">
+                            <h5><span class="material-icons">insights</span> Profit Analysis</h5>
+                            <div class="profit-info">
+                                <div class="profit-item">
+                                    <span>Profit per unit:</span>
+                                    <span id="profitPerUnit">Rs 0.00</span>
+                                </div>
+                                <div class="profit-item">
+                                    <span>Profit margin:</span>
+                                    <span id="profitMargin">0%</span>
+                                </div>
+                                <div class="profit-item">
+                                    <span>Total potential profit:</span>
+                                    <span id="totalPotentialProfit">Rs 0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" onclick="hideAllForms()">Cancel</button>
+                            <button type="button" onclick="savePriceUpdate()" class="btn-primary">Save Prices</button>
+                        </div>
+                    </div>
 
-    <!-- Toast -->
-    <div id="toast" class="toast"></div>
-  </div>
+                    <!-- Full Edit Form -->
+                    <div id="fullEditForm" class="edit-form" style="display: none;">
+                        <h4><span class="material-icons">edit</span> Full Product Edit</h4>
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" id="editFullName" placeholder="Enter product name">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="editFullCategory">
+                                <option value="food">Food & Beverages</option>
+                                <option value="household">Household Items</option>
+                                <option value="personal">Personal Care</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Cost Price</label>
+                                <input type="number" id="editFullCostPrice" min="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Selling Price</label>
+                                <input type="number" id="editFullSellingPrice" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock Quantity</label>
+                            <input type="number" id="editFullStock" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Supplier</label>
+                            <input type="text" id="editFullSupplier" placeholder="Enter supplier name">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" onclick="hideAllForms()">Cancel</button>
+                            <button type="button" onclick="saveFullEdit()" class="btn-primary">Save All Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Multi-Action Floating Button -->
+        <div class="fab-container">
+            <div class="fab-menu" id="fabMenu">
+                <div class="fab-option" data-page="sales">
+                    <div class="fab-label" data-translate="New Sale">New Sale</div>
+                    <div class="fab-btn">
+                        <span class="material-icons">point_of_sale</span>
+                    </div>
+                </div>
+                <div class="fab-option" data-page="inventory">
+                    <div class="fab-label" data-translate="Inventory">Inventory</div>
+                    <div class="fab-btn">
+                        <span class="material-icons">inventory_2</span>
+                    </div>
+                </div>
+                <div class="fab-option" data-page="expenses">
+                    <div class="fab-label" data-translate="Expenses">Expenses</div>
+                    <div class="fab-btn">
+                        <span class="material-icons">receipt</span>
+                    </div>
+                </div>
+            </div>
+            <button class="fab-main" id="fabMain">
+                <span class="material-icons">add</span>
+            </button>
+        </div>
+        
+        <!-- Receipt Modal -->
+        <div class="modal" id="receiptModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeReceiptModal()"></div>
+            <div class="modal-content receipt-modal">
+                <div class="modal-header">
+                    <h3>Receipt Generated</h3>
+                    <button class="modal-close" onclick="closeReceiptModal()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="receipt-preview" id="receiptPreview">
+                        <!-- Receipt preview will be shown here -->
+                    </div>
+                    <div class="receipt-actions">
+                        <button class="receipt-btn primary" id="downloadReceiptBtn">
+                            <span class="material-icons">download</span> Download PDF
+                        </button>
+                        <button class="receipt-btn secondary" id="shareReceiptBtn">
+                            <span class="material-icons">share</span> Share Receipt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <!-- Bottom Sheet: Add Product -->
-  <div id="sheet-product" class="bottom-sheet">
-    <div class="sheet-container">
-      <div class="sheet-drag-handle"></div>
-      <div class="sheet-header">
-        <h3>Add Product</h3>
-        <button id="cancel-product" class="btn-close"><i class="ri-close-line"></i></button>
-      </div>
-      <div id="product-form" class="sheet-body"></div>
-      <div class="sheet-actions">
-        <button id="save-product" class="btn-primary">Add Product</button>
-      </div>
+        <!-- Low Stock Modal -->
+        <div class="modal" id="lowStockModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeLowStockModal()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="Low Stock Items">
+                        <span class="material-icons">warning</span> Low Stock Items
+                    </h3>
+                    <button class="modal-close" onclick="closeLowStockModal()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="lowStockList">
+                        <!-- Low stock items will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit Summary Modal -->
+        <div class="modal" id="creditSummaryModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeCreditSummaryModal()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 data-translate="Credit Summary">
+                        <span class="material-icons">credit_card</span> Credit Summary
+                    </h3>
+                    <button class="modal-close" onclick="closeCreditSummaryModal()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="credit-summary-stats">
+                        <div class="summary-stat">
+                            <div class="stat-label" data-translate="Total Outstanding">Total Outstanding</div>
+                            <div class="stat-value" id="modalTotalOutstanding">Rs 0</div>
+                        </div>
+                        <div class="summary-stat">
+                            <div class="stat-label" data-translate="Active Credits">Active Credits</div>
+                            <div class="stat-value" id="modalActiveCredits">0</div>
+                        </div>
+                        <div class="summary-stat">
+                            <div class="stat-label" data-translate="Paid This Month">Paid This Month</div>
+                            <div class="stat-value" id="modalPaidThisMonth">Rs 0</div>
+                        </div>
+                    </div>
+                    <div class="recent-credits">
+                        <h4 data-translate="Recent Credits">Recent Credits</h4>
+                        <div id="recentCreditsList">
+                            <!-- Recent credits will be displayed here -->
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="view-all-btn" onclick="viewAllCredits()" data-translate="View All Credits">View All Credits</button>
+                        <button class="add-credit-btn" onclick="addNewCreditFromDashboard()" data-translate="Add Credit">Add Credit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Transaction History Modal -->
+        <div class="modal transaction-history-modal" id="transactionHistoryModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeTransactionHistoryModal()"></div>
+            <div class="modal-content transaction-history-content">
+                <div class="modal-header">
+                    <h3 data-translate="All Transaction History">
+                        <span class="material-icons">analytics</span> All Transaction History
+                    </h3>
+                    <button class="modal-close" onclick="closeTransactionHistoryModal()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body transaction-history-body">
+                    <!-- Financial Summary -->
+                    <div class="financial-summary-modal">
+                        <div class="summary-row">
+                            <div class="summary-card revenue">
+                                <div class="summary-icon material-icons">payments</div>
+                                <div class="summary-info">
+                                    <div class="summary-label" data-translate="Total Revenue">Total Revenue</div>
+                                    <div class="summary-amount" id="modalTotalRevenue">Rs 0</div>
+                                </div>
+                            </div>
+                            <div class="summary-card expenses">
+                                <div class="summary-icon material-icons">receipt</div>
+                                <div class="summary-info">
+                                    <div class="summary-label" data-translate="Total Expenses">Total Expenses</div>
+                                    <div class="summary-amount" id="modalTotalExpenses">Rs 0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-card profit">
+                                <div class="summary-icon material-icons">trending_up</div>
+                                <div class="summary-info">
+                                    <div class="summary-label" data-translate="Net Profit">Net Profit</div>
+                                    <div class="summary-amount" id="modalNetProfit">Rs 0</div>
+                                </div>
+                            </div>
+                            <div class="summary-card credit">
+                                <div class="summary-icon material-icons">account_balance</div>
+                                <div class="summary-info">
+                                    <div class="summary-label" data-translate="Outstanding Credit">Outstanding Credit</div>
+                                    <div class="summary-amount" id="modalOutstandingCredit">Rs 0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Period Filter -->
+                    <div class="period-filter-modal">
+                        <button class="period-btn active" data-period="today" onclick="filterModalTransactionsByPeriod('today')" data-translate="Today">Today</button>
+                        <button class="period-btn" data-period="week" onclick="filterModalTransactionsByPeriod('week')" data-translate="This Week">This Week</button>
+                        <button class="period-btn" data-period="month" onclick="filterModalTransactionsByPeriod('month')" data-translate="This Month">This Month</button>
+                        <button class="period-btn" data-period="all" onclick="filterModalTransactionsByPeriod('all')" data-translate="All Time">All Time</button>
+                    </div>
+                    
+                    <!-- Transaction Type Tabs -->
+                    <div class="transaction-tabs-modal">
+                        <button class="tab-btn active" data-type="all" onclick="filterModalTransactionsByType('all')" data-translate="All">All</button>
+                        <button class="tab-btn" data-type="sales" onclick="filterModalTransactionsByType('sales')" data-translate="Sales">Sales</button>
+                        <button class="tab-btn" data-type="expenses" onclick="filterModalTransactionsByType('expenses')" data-translate="Expenses">Expenses</button>
+                        <button class="tab-btn" data-type="credit" onclick="filterModalTransactionsByType('credit')" data-translate="Credit">Credit</button>
+                    </div>
+                    
+                    <!-- Export Actions -->
+                    <div class="export-actions-modal">
+                        <button class="export-btn-modal" onclick="exportModalTransactions()">
+                            <span class="material-icons">file_download</span> <span data-translate="Export CSV">Export CSV</span>
+                        </button>
+                        <button class="filter-btn-modal" onclick="openAdvancedFilter()">
+                            <span class="material-icons">filter_list</span> <span data-translate="Advanced Filter">Advanced Filter</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Transactions List -->
+                    <div class="transactions-list-modal" id="modalTransactionsList">
+                        <!-- Transactions will be populated here -->
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="no-transactions-modal" id="modalNoTransactions" style="display: none;">
+                        <div class="no-transactions-icon material-icons">analytics</div>
+                        <h4 data-translate="No Transactions Found">No Transactions Found</h4>
+                        <p data-translate="Start making sales or adding expenses to see your transaction history.">Start making sales or adding expenses to see your transaction history.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profit Analysis Modal -->
+        <div class="modal profit-analysis-modal" id="profitAnalysisModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeProfitAnalysisModal()"></div>
+            <div class="modal-content profit-analysis-content">
+                <div class="modal-header">
+                    <h3><span class="material-icons">paid</span> Product Profit Analysis</h3>
+                    <button class="modal-close" onclick="closeProfitAnalysisModal()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="profit-summary-cards">
+                        <div class="profit-card">
+                            <div class="profit-card-title">Total Revenue</div>
+                            <div class="profit-card-value" id="profitTotalRevenue">Rs 0</div>
+                            <div class="profit-card-subtitle">From sales</div>
+                        </div>
+                        <div class="profit-card">
+                            <div class="profit-card-title">Total Cost</div>
+                            <div class="profit-card-value" id="profitTotalCost">Rs 0</div>
+                            <div class="profit-card-subtitle">Product costs</div>
+                        </div>
+                        <div class="profit-card profit-highlight">
+                            <div class="profit-card-title">Net Profit</div>
+                            <div class="profit-card-value" id="profitNetProfit">Rs 0</div>
+                            <div class="profit-card-subtitle" id="profitMarginPercent">0% margin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="profit-period-filter">
+                        <button class="period-btn active" onclick="filterProfitByPeriod('today')" data-period="today">Today</button>
+                        <button class="period-btn" onclick="filterProfitByPeriod('week')" data-period="week">This Week</button>
+                        <button class="period-btn" onclick="filterProfitByPeriod('month')" data-period="month">This Month</button>
+                    </div>
+                    
+                    <div class="profit-details">
+                        <h4>Profit Breakdown</h4>
+                        <div class="profit-example">
+                            <div class="example-text">
+                                <strong>Example:</strong> If cost price is Rs 5 and selling price is Rs 10, profit = Rs 5
+                            </div>
+                        </div>
+                        <div class="profit-transactions-list" id="profitTransactionsList">
+                            <!-- Profit transactions will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Transaction Details Modal -->
+        <div class="modal transaction-details-modal" id="transactionDetailsModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeTransactionDetailsModal()"></div>
+            <div class="modal-content transaction-details-content">
+                <div class="modal-header">
+                    <h3 id="transactionDetailsTitle">Transaction Details</h3>
+                    <button class="modal-close" onclick="closeTransactionDetailsModal()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body transaction-details-body">
+                    <div class="transaction-details-info" id="transactionDetailsInfo">
+                        <!-- Transaction details will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset Confirmation Modal -->
+        <div class="modal" id="resetConfirmationModal" style="display: none;">
+            <div class="modal-overlay" onclick="closeResetConfirmation()"></div>
+            <div class="modal-content reset-confirmation-content">
+                <div class="modal-header">
+                    <h3 class="reset-warning-title">
+                        <span class="material-icons">warning</span> Reset All Data
+                    </h3>
+                    <button class="modal-close" onclick="closeResetConfirmation()">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="reset-warning-container">
+                        <div class="reset-warning-icon material-icons">error</div>
+                        <div class="reset-warning-content">
+                            <h4 data-translate="Warning! This action cannot be undone.">Warning! This action cannot be undone.</h4>
+                            <p data-translate="You are about to permanently delete:">You are about to permanently delete:</p>
+                            <ul class="reset-items-list">
+                                <li data-translate="All sales transactions and history">✗ All sales transactions and history</li>
+                                <li data-translate="All product inventory data">✗ All product inventory data</li>
+                                <li data-translate="All expense records">✗ All expense records</li>
+                                <li data-translate="All credit/debt information">✗ All credit/debt information</li>
+                                <li data-translate="All customer data">✗ All customer data</li>
+                                <li data-translate="All business analytics">✗ All business analytics</li>
+                            </ul>
+                            <div class="reset-confirmation-steps">
+                                <div class="confirmation-step" id="step1">
+                                    <p data-translate="Step 1: Type 'DELETE' to confirm">Step 1: Type 'DELETE' to confirm</p>
+                                    <input type="text" id="deleteConfirmInput" placeholder="Type DELETE here" maxlength="6">
+                                </div>
+                                <div class="confirmation-step" id="step2" style="display: none;">
+                                    <p data-translate="Step 2: Are you absolutely sure?">Step 2: Are you absolutely sure?</p>
+                                    <div class="final-confirmation-buttons">
+                                        <button class="settings-btn secondary" onclick="closeResetConfirmation()">Cancel</button>
+                                        <button class="settings-btn danger" onclick="proceedWithReset()" disabled id="finalResetBtn">
+                                            <span class="material-icons">delete_forever</span> Yes, Delete Everything
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Bottom Sheet: Add Expense -->
-  <div id="sheet-expense" class="bottom-sheet">
-    <div class="sheet-container">
-      <div class="sheet-drag-handle"></div>
-      <div class="sheet-header">
-        <h3>Add Expense</h3>
-        <button id="cancel-expense" class="btn-close"><i class="ri-close-line"></i></button>
-      </div>
-      <div id="expense-form" class="sheet-body"></div>
-      <div class="sheet-actions">
-        <button id="save-expense" class="btn-primary">Add Expense</button>
-      </div>
+    <!-- Custom Notification System -->
+    <div class="notification-container" id="notificationContainer">
+        <!-- Notifications will be dynamically added here -->
     </div>
-  </div>
 
-  <script src="app.js"></script>
-  </script>
+    <!-- Custom Confirmation Dialog -->
+    <div class="custom-confirm-modal" id="customConfirmModal" style="display: none;">
+        <div class="confirm-overlay"></div>
+        <div class="confirm-dialog">
+            <div class="confirm-icon material-icons" id="confirmIcon">warning</div>
+            <div class="confirm-title" id="confirmTitle">Confirm Action</div>
+            <div class="confirm-message" id="confirmMessage">Are you sure you want to proceed?</div>
+            <div class="confirm-buttons">
+                <button class="confirm-btn cancel" id="confirmCancelBtn">Cancel</button>
+                <button class="confirm-btn confirm" id="confirmConfirmBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
 </body>
+<script src="https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js"></script>
+<script src="storage.js"></script>
+<script src="script.js"></script>
 </html>
