@@ -10,7 +10,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-  background: #f9f9f9;
+  background: #fafafa;
   color: #333;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
@@ -1002,4 +1002,5 @@ input:focus, select:focus, textarea:focus {
     max-width: calc(100% - 34px);
     max-height: 48px;
   }
+
 }
