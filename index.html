@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Khem Raj Ramtel's website is under construction with exciting features coming soon. Stay tuned for the launch!">
-    <meta name="keywords" content="Khem Raj Ramtel, portfolio, coming soon, under construction">
-    <meta name="author" content="Khem Raj Ramtel">
-    <meta name="theme-color" content="#0a0a0a">
-    <meta property="og:title" content="Khem Raj Ramtel - Coming Soon">
-    <meta property="og:description" content="My website is under construction with exciting features coming soon.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.khemrajramtel.com.np">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Khem Raj Ramtel - Cybersecurity Student & Aspiring Security Professional. Passionate about network security, ethical hacking, and protecting digital infrastructure.">
+<meta name="keywords" content="Khem Raj Ramtel, cybersecurity student, ethical hacking, network security, information security, cyber defense, security analyst, Nepal cybersecurity, penetration testing, digital forensics">
+<meta name="author" content="Khem Raj Ramtel">
+<meta name="theme-color" content="#6366f1">
+<meta property="og:title" content="Khem Raj Ramtel">
+<meta property="og:description" content="Aspiring cybersecurity professional specializing in network security, ethical hacking, and cyber defense strategies.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.khemrajramtel.com.np">
+<meta property="og:site_name" content="Khem Raj Ramtel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Khem Raj Ramtel">
+<meta name="twitter:description" content="Aspiring cybersecurity professional passionate about securing digital infrastructure and ethical hacking.">
+
+<!-- Additional Cybersecurity-specific meta tags -->
+<meta name="robots" content="index, follow">
+<meta name="subject" content="Cybersecurity Portfolio">
+<meta name="classification" content="Information Security">
+<meta name="category" content="Cybersecurity">
     <title>Khem Raj Ramtel</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
@@ -29,676 +37,573 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="manifest" href="manifest.json">
 </head>
-<body class="dark-mode">
-    <!-- 3D Background -->
-    <canvas id="threejs-background"></canvas>
-    
-    <!-- Glass Elements -->
-    <div class="glass-elements">
-        <div class="glass-element g1"></div>
-        <div class="glass-element g2"></div>
-        <div class="glass-element g3"></div>
+<body>
+    <!-- Background -->
+    <div class="advanced-bg">
+        <div class="bg-gradient"></div>
+        <div class="animated-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="floating-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+            <div class="floating-element element-4"></div>
+        </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="https://www.khemrajramtel.com.np" class="logo-container" id="logoLink">
+                    <img src="logo.png" alt="Khem Raj Ramtel Logo" class="logo-image">
+                    <span class="logo-text">Khem Raj Ramtel</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Skills</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#contact" class="btn-contact">Contact Me</a>
+                <div class="nav-toggle">
+                    <span class="toggle-line"></span>
+                    <span class="toggle-line"></span>
+                    <span class="toggle-line"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <a href="https://www.khemrajramtel.com.np" class="logo-container" id="logoLink">
-                <img src="logo.png" alt="Khem Raj Ramtel Logo" class="logo-image">
-                <span class="logo-text">Khem Raj Ramtel</span>
-            </a>
-            
-            <nav class="nav-menu">
-                <a href="#about" class="nav-link hover-underline">About</a>
-                <a href="#features" class="nav-link hover-underline">Features</a>
-                <a href="#contact" class="nav-link hover-underline">Contact</a>
-                <div class="nav-indicator"></div>
-            </nav>
-            
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </button>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="hero">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-text">Cybersecurity Student</span>
+                    <div class="badge-pulse"></div>
+                </div>
+                
                 <h1 class="hero-title">
-                    <span class="title-word title-word-1">Crafting</span>
-                    <span class="title-word title-word-2">Digital</span>
-                    <span class="title-word title-word-3">Experiences</span>
+                    <span class="title-main">Khem Raj Ramtel</span>
                 </h1>
                 
-                <p class="hero-subtext">My portfolio is under construction, but something extraordinary is coming soon. Stay tuned for the reveal!</p>
+                <p class="hero-subtitle">
+                    Passionate about securing digital infrastructure and protecting against cyber threats. 
+                    Currently pursuing cybersecurity education while developing practical security skills.
+                </p>
                 
-                <!-- Countdown Timer -->
-                <div class="countdown-container">
-                    <div class="countdown-svg">
-                        <svg viewBox="0 0 100 100">
-                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
-                        </svg>
-                        <div class="countdown-item">
-                            <div class="countdown-value" id="days">00</div>
-                            <div class="countdown-label">Days</div>
-                        </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="8">0</div>
+                        <div class="stat-label">Security Projects</div>
                     </div>
-                    <div class="countdown-svg">
-                        <svg viewBox="0 0 100 100">
-                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
-                        </svg>
-                        <div class="countdown-item">
-                            <div class="countdown-value" id="hours">00</div>
-                            <div class="countdown-label">Hours</div>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="3">0</div>
+                        <div class="stat-label">Years Learning</div>
                     </div>
-                    <div class="countdown-svg">
-                        <svg viewBox="0 0 100 100">
-                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
-                        </svg>
-                        <div class="countdown-item">
-                            <div class="countdown-value" id="minutes">00</div>
-                            <div class="countdown-label">Minutes</div>
-                        </div>
-                    </div>
-                    <div class="countdown-svg">
-                        <svg viewBox="0 0 100 100">
-                            <circle class="countdown-circle" cx="50" cy="50" r="45"/>
-                        </svg>
-                        <div class="countdown-item">
-                            <div class="countdown-value" id="seconds">00</div>
-                            <div class="countdown-label">Seconds</div>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="12">0</div>
+                        <div class="stat-label">Security Tools</div>
                     </div>
                 </div>
-                
-                <!-- Progress Bar -->
-                <div class="progress-section">
-                    <div class="progress-header">
-                        <span>Development Progress</span>
-                        <span class="progress-percent" data-tooltip="Current completion status">87%</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-bar" style="width: 87%">
-                            <div class="progress-dot"></div>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span class="btn-text">View My Work</span>
+                        <div class="btn-icon">
+                            <i class="fas fa-arrow-right"></i>
                         </div>
-                    </div>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span class="btn-text">Get In Touch</span>
+                    </a>
                 </div>
             </div>
             
-            <!-- Scroll Indicator -->
+            <div class="hero-visual">
+                <div class="profile-card">
+                    <div class="card-content">
+                        <div class="profile-avatar">
+                            <div class="avatar-image">
+                                <!-- <i class="fas fa-shield-alt"></i> -->
+                                <img src="avatar.png" alt="avatar" class="avatar-photo">
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Khem Raj Ramtel</h3>
+                            <p>University Student</p>
+                            <div class="profile-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Nepal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-background"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
             <div class="scroll-indicator">
                 <div class="scroll-line"></div>
-                <span>Scroll</span>
+                <span>Scroll to explore</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Features Section -->
-        <section id="features" class="features-section">
-            <h2 class="section-title">
-                <span class="title-decorator"></span>
-                <span class="title-text">Coming Features</span>
-                <span class="title-decorator"></span>
-            </h2>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line">
+                    <div class="line-progress"></div>
+                </div>
+            </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon-container">
-                        <div class="feature-icon-bg"></div>
-                        <i class="fas fa-bolt feature-icon"></i>
+            <div class="about-grid">
+                <div class="about-content">
+                    <div class="content-block">
+                        <h3>Hello! I'm Khem Raj Ramtel</h3>
+                        <p>
+                            I'm a dedicated cybersecurity student with a strong interest in network security, 
+                            ethical hacking, and digital forensics. I'm passionate about understanding how 
+                            systems can be secured and how vulnerabilities can be identified and mitigated.
+                        </p>
+                        <p>
+                            My journey in cybersecurity began with curiosity about how digital systems can be 
+                            protected from malicious actors, and it has evolved into a commitment to developing 
+                            the skills needed to secure our digital world.
+                        </p>
                     </div>
-                    <h3 class="feature-title">Next-Gen Performance</h3>
-                    <p class="feature-desc">Optimized with WebAssembly and edge computing for unmatched speed and responsiveness.</p>
-                    <div class="feature-hover-effect"></div>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon-container">
-                        <div class="feature-icon-bg"></div>
-                        <i class="fas fa-cube feature-icon"></i>
+                <div class="about-visual">
+                    <div class="code-window">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="window-title">security_profile.py</span>
+                        </div>
+                        <div class="window-content">
+                            <div id="code-container"></div>
+                            <div class="code-cursor">|</div>
+                        </div>
                     </div>
-                    <h3 class="feature-title">3D Experiences</h3>
-                    <p class="feature-desc">Immersive WebGL and Three.js powered visualizations and interactive elements.</p>
-                    <div class="feature-hover-effect"></div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon-container">
-                        <div class="feature-icon-bg"></div>
-                        <i class="fas fa-robot feature-icon"></i>
-                    </div>
-                    <h3 class="feature-title">AI Integration</h3>
-                    <p class="feature-desc">Smart content generation and personalized experiences powered by machine learning.</p>
-                    <div class="feature-hover-effect"></div>
                 </div>
             </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h2 class="contact-title">Let's Connect</h2>
-                    <p class="contact-subtext">Have a project in mind or want to collaborate? Reach out before the official launch!</p>
+            <div class="about-features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4>Analytical Thinker</h4>
+                    <p>I approach security challenges with careful analysis and systematic problem-solving</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4>Fast Learner</h4>
+                    <p>Quick to adapt to new security tools, techniques, and emerging threats</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h4>Ethical Mindset</h4>
+                    <p>Committed to using security knowledge responsibly and ethically</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Skills</h2>
+                <div class="section-line">
+                    <div class="line-progress"></div>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="category-title">Network Security</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Firewall Config</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Wireshark</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">VPN Technologies</span>
+                                <span class="skill-level">Learning</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="50"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <h3 class="category-title">Ethical Hacking</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Kali Linux</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="65"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Metasploit</span>
+                                <span class="skill-level">Basic</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="55"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Nmap</span>
+                                <span class="skill-level">Intermediate</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="category-title">Security Tools</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Burp Suite</span>
+                                <span class="skill-level">Learning</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="45"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Nessus</span>
+                                <span class="skill-level">Basic</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="60"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">SIEM Tools</span>
+                                <span class="skill-level">Learning</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="40"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Projects</h2>
+                <div class="section-line">
+                    <div class="line-progress"></div>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Network Vulnerability Scanner</h3>
+                        <p class="project-description">
+                            A Python-based network scanner that identifies active hosts, open ports, 
+                            and potential vulnerabilities in target networks.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Nmap</span>
+                            <span class="tech-tag">Socket</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-key"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Password Strength Analyzer</h3>
+                        <p class="project-description">
+                            A security tool that evaluates password strength and provides 
+                            recommendations for creating more secure authentication credentials.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Regex</span>
+                            <span class="tech-tag">Security</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Security Awareness Platform</h3>
+                        <p class="project-description">
+                            An educational web application that teaches basic cybersecurity 
+                            concepts and best practices for digital safety.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Security</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-line">
+                <div class="line-progress"></div>
+            </div>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3>Let's Secure Something Together</h3>
+                    <p>
+                        I'm always interested in discussing cybersecurity projects, research opportunities, 
+                        or ways to collaborate on security initiatives.
+                    </p>
                     
                     <div class="contact-methods">
-                        <a href="mailto:contact@khemrajramtel.com.np" class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <span>contact@khemrajramtel.com.np</span>
-                        </a>
-                        <a href="tel:+9779861457788" class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <span>+977 9861457788</span>
-                        </a>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-details">
+                                <span class="method-label">Email</span>
+                                <a href="mailto:contact@khemrajramtel.com.np" class="method-value">contact@khemrajramtel.com.np</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-details">
+                                <span class="method-label">Phone</span>
+                                <a href="tel:+9779812345678" class="method-value">+977 9812345678</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-details">
+                                <span class="method-label">Location</span>
+                                <span class="method-value">Nepal</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            </div>
+            
+            <div class="contact-form">
+                <form class="advanced-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Web3Forms required fields -->
                     <input type="hidden" name="access_key" value="1730f946-6cc3-4d8b-a2c3-dc44e43d9b09">
-                
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" required>
-                        <label for="name">Your Name</label>
-                        <div class="form-underline"></div>
+                    <input type="hidden" name="subject" value="New Message - Khem Raj Ramtel Portfolio">
+                    <input type="hidden" name="from_name" value="Portfolio Website">
+                    <input type="checkbox" name="botcheck" style="display: none;">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="text" id="name" name="name" class="form-input" required>
+                                <label for="name" class="form-label">Your Name</label>
+                                <div class="input-highlight"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="email" id="email" name="email" class="form-input" required>
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-highlight"></div>
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="form-group">
-                        <input type="email" id="email" name="email" required>
-                        <label for="email">Email Address</label>
-                        <div class="form-underline"></div>
+                        <div class="input-container">
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                            <label for="subject" class="form-label">Subject</label>
+                            <div class="input-highlight"></div>
+                        </div>
                     </div>
+                    
                     <div class="form-group">
-                        <textarea id="message" name="message" rows="3" required></textarea>
-                        <label for="message">Your Message</label>
-                        <div class="form-underline"></div>
+                        <div class="input-container textarea-container">
+                            <textarea id="message" name="message" class="form-input" required></textarea>
+                            <label for="message" class="form-label">Your Message</label>
+                            <div class="input-highlight"></div>
+                        </div>
                     </div>
+                    
                     <button type="submit" class="submit-btn">
-                        <span>Send Message</span>
+                        <span class="btn-text">Send Message</span>
+                        <div class="btn-loader">
+                            <div class="loader-dot"></div>
+                            <div class="loader-dot"></div>
+                            <div class="loader-dot"></div>
+                        </div>
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- Social Media Section -->
-        <section class="social-section">
-            <h2 class="social-title">Follow the Journey</h2>
-            <p class="social-subtext">Connect with me on social media for updates and behind-the-scenes content.</p>
-            
-            <div class="social-links">
-                <a href="https://github.com/rajramtel999" target="_blank" class="social-link" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                    <span class="social-tooltip">GitHub</span>
-                </a>
-                <a href="https://linkedin.com/in/rajramtel999" target="_blank" class="social-link" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                    <span class="social-tooltip">LinkedIn</span>
-                </a>
-                <a href="https://twitter.com/rajramtel999" target="_blank" class="social-link" aria-label="Twitter">
-                    <i class="fab fa-twitter"></i>
-                    <span class="social-tooltip">Twitter</span>
-                </a>
-                <a href="https://instagram.com/rajramtel999" target="_blank" class="social-link" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                    <span class="social-tooltip">Instagram</span>
-                </a>
-                <a href="https://facebook.com/rajramtel999" target="_blank" class="social-link" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                    <span class="social-tooltip">Facebook</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
             <div class="footer-content">
-                <div class="signature">
-                    <svg viewBox="0 0 500 100" class="signature-svg">
-                        <path class="signature-path" d="M10,50 Q30,20 50,50 T90,50" stroke="#00ffcc" fill="none"/>
-                    </svg>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Khem Raj Ramtel. All rights reserved.</p>
                 </div>
-                <p class="copyright">&copy; <span id="currentYear"></span> Khem Raj Ramtel. All rights reserved.</p>
-                <a href="#" class="back-to-top" aria-label="Back to top">
-                    <i class="fas fa-arrow-up"></i>
-                </a>
             </div>
-        </footer>
-    </div>
-
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" aria-label="Toggle theme">
-        <div class="theme-toggle-inner">
-            <i class="fas fa-sun"></i>
-            <i class="fas fa-moon"></i>
         </div>
-    </button>
+    </footer>
 
-    <!-- Loading Animation -->
-    <div class="page-loader">
-        <div class="loader-spinner">
-            <div class="spinner-circle"></div>
-            <div class="spinner-circle"></div>
-            <div class="spinner-circle"></div>
-        </div>
-    </div>
-
-    <!-- JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Remove loader when page is loaded
-    const pageLoader = document.querySelector('.page-loader');
-    setTimeout(() => {
-        pageLoader.style.opacity = '0';
-        setTimeout(() => {
-            pageLoader.style.display = 'none';
-        }, 500);
-    }, 1000);
-
-    // Initialize 3D background
-    const initThreeJSBackground = () => {
-        const canvas = document.getElementById('threejs-background');
-        if (!canvas) return;
-        
-        const renderer = new THREE.WebGLRenderer({
-            canvas,
-            alpha: true,
-            antialias: true
-        });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
-        
-        // Create particles
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particleCount = 500;
-        
-        const posArray = new Float32Array(particleCount * 3);
-        for(let i = 0; i < particleCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 10;
-        }
-        
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.02,
-            color: 0x00ffcc,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-        
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        
-        // Animation loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.x += 0.0005;
-            particlesMesh.rotation.y += 0.0005;
-            renderer.render(scene, camera);
-        };
-        animate();
-        
-        // Handle resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    };
-    
-    // Initialize custom cursor
-    const initCustomCursor = () => {
-        const cursor = document.querySelector('.custom-cursor');
-        if (!cursor) return;
-        
-        const links = document.querySelectorAll('a, button, .feature-card');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-        
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.classList.add('cursor-hover');
-            });
-            link.addEventListener('mouseleave', () => {
-                cursor.classList.remove('cursor-hover');
-            });
-        });
-    };
-    
-    // Initialize countdown timer
-    const initCountdown = () => {
-        const countdownDate = new Date();
-        countdownDate.setDate(countdownDate.getDate() + 14); // 14 days from now
-        
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            // Update SVG circle animation
-            const circles = document.querySelectorAll('.countdown-circle');
-            const totalDuration = 14 * 24 * 60 * 60 * 1000; // Total duration in ms
-            const remaining = distance;
-            const elapsed = totalDuration - remaining;
-            
-            // Days circle (full rotation in 14 days)
-            const dayPercentage = (elapsed % (24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000);
-            if (circles[0]) circles[0].style.strokeDashoffset = 283 * (1 - dayPercentage);
-            
-            // Hours circle (full rotation in 24 hours)
-            const hourPercentage = (elapsed % (60 * 60 * 1000)) / (60 * 60 * 1000);
-            if (circles[1]) circles[1].style.strokeDashoffset = 283 * (1 - hourPercentage);
-            
-            // Minutes circle (full rotation in 60 minutes)
-            const minutePercentage = (elapsed % (60 * 1000)) / (60 * 1000);
-            if (circles[2]) circles[2].style.strokeDashoffset = 283 * (1 - minutePercentage);
-            
-            // Seconds circle (full rotation in 60 seconds)
-            const secondPercentage = (elapsed % 1000) / 1000;
-            if (circles[3]) circles[3].style.strokeDashoffset = 283 * (1 - secondPercentage);
-            
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                const countdownContainer = document.querySelector('.countdown-container');
-                if (countdownContainer) {
-                    countdownContainer.innerHTML = '<div class="launch-message">Website Launched!</div>';
-                }
-            }
-        };
-        
-        // Initialize circles
-        const circles = document.querySelectorAll('.countdown-circle');
-        circles.forEach(circle => {
-            circle.style.strokeDasharray = '283';
-            circle.style.strokeDashoffset = '283';
-        });
-        
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
-    };
-    
-    // Initialize theme toggle
-    const initThemeToggle = () => {
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (!themeToggle) return;
-        
-        const body = document.body;
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.remove('dark-mode');
-            body.classList.add('light-mode');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            body.classList.toggle('light-mode');
-            
-            const isLight = body.classList.contains('light-mode');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        });
-    };
-    
-    // Initialize form animation
-    const initFormAnimation = () => {
-        const formGroups = document.querySelectorAll('.form-group');
-        
-        formGroups.forEach(group => {
-            const input = group.querySelector('input, textarea');
-            const label = group.querySelector('label');
-            const underline = group.querySelector('.form-underline');
-            
-            if (!input || !label || !underline) return;
-            
-            input.addEventListener('focus', () => {
-                label.classList.add('active');
-                underline.style.transform = 'scaleX(1)';
-            });
-            
-            input.addEventListener('blur', () => {
-                if (!input.value) {
-                    label.classList.remove('active');
-                }
-                underline.style.transform = 'scaleX(0)';
-            });
-            
-            // Check if there's pre-filled content
-            if (input.value) {
-                label.classList.add('active');
-            }
-        });
-        
-        // Form submission
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const submitBtn = contactForm.querySelector('.submit-btn');
-                if (submitBtn) {
-                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent';
-                    submitBtn.classList.add('success');
-                    
-                    setTimeout(() => {
-                        contactForm.reset();
-                        submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
-                        submitBtn.classList.remove('success');
-                        document.querySelectorAll('.form-group label').forEach(label => {
-                            label.classList.remove('active');
-                        });
-                    }, 3000);
-                }
-            });
-        }
-    };
-    
-    // Initialize scroll animations
-    const initScrollAnimations = () => {
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.fade-in, .slide-in');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('visible');
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll(); // Run once on load
-    };
-    
-    // Initialize mobile menu
-    const initMobileMenu = () => {
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        if (!menuBtn || !navMenu) return;
-        
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-        
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            });
-        });
-    };
-    
-    // Initialize navigation indicator
-    const initNavIndicator = () => {
-        const navLinks = document.querySelectorAll('.nav-link');
-        const navIndicator = document.querySelector('.nav-indicator');
-        
-        if (!navLinks.length || !navIndicator) return;
-        
-        function setIndicator(el) {
-            navIndicator.style.width = `${el.offsetWidth}px`;
-            navIndicator.style.left = `${el.offsetLeft}px`;
-            navIndicator.style.backgroundColor = getComputedStyle(el).color;
-        }
-        
-        navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                setIndicator(link);
-            });
-            
-            link.addEventListener('click', () => {
-                setIndicator(link);
-            });
-        });
-        
-        // Set initial position
-        if (navLinks.length > 0) {
-            setIndicator(navLinks[0]);
-        }
-    };
-    
-    // Initialize current year in footer
-    const initCurrentYear = () => {
-        const currentYearElement = document.getElementById('currentYear');
-        if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
-        }
-    };
-    
-    // Initialize back to top button
-    const initBackToTop = () => {
-        const backToTopBtn = document.querySelector('.back-to-top');
-        if (!backToTopBtn) return;
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-        
-        backToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    };
-
-    // Logo click animation and functionality
-    const initLogoAnimation = () => {
-        const logoLink = document.getElementById('logoLink');
-        if (!logoLink) return;
-        
-        const logoImage = document.querySelector('.logo-image');
-        const logoText = document.querySelector('.logo-text');
-        
-        // Add loaded class after page load
-        window.addEventListener('load', () => {
-            logoLink.classList.add('loaded');
-        });
-        
-        // Click animation and navigation
-        logoLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Click animation
-            if (logoImage) logoImage.style.transform = 'scale(0.8) rotate(-20deg)';
-            if (logoText) {
-                logoText.style.transform = 'translateX(5px) scale(0.95)';
-                logoText.style.opacity = '0.8';
-            }
-            
-            // Add ripple effect
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple-effect');
-            ripple.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
-            ripple.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
-            this.appendChild(ripple);
-            
-            // Remove ripple after animation
-            setTimeout(() => {
-                ripple.remove();
-            }, 1000);
-            
-            // Navigate after animation
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 300);
-        });
-        
-        // Hover effects
-        logoLink.addEventListener('mouseenter', () => {
-            if (logoImage) logoImage.style.transform = 'rotate(15deg) scale(1.1)';
-            if (logoText) logoText.style.transform = 'translateX(5px)';
-        });
-        
-        logoLink.addEventListener('mouseleave', () => {
-            if (logoImage) logoImage.style.transform = 'rotate(0) scale(1)';
-            if (logoText) {
-                logoText.style.transform = 'translateX(0)';
-                logoText.style.opacity = '1';
-            }
-        });
-    };
-    
-    // Initialize all functions
-    const init = () => {
-        initThreeJSBackground();
-        initCustomCursor();
-        initCountdown();
-        initThemeToggle();
-        initFormAnimation();
-        initScrollAnimations();
-        initMobileMenu();
-        initNavIndicator();
-        initCurrentYear();
-        initBackToTop();
-        initLogoAnimation();
-        
-        // Animate signature in footer
-        const signaturePath = document.querySelector('.signature-path');
-        if (signaturePath) {
-            signaturePath.style.strokeDasharray = '500';
-            signaturePath.style.strokeDashoffset = '500';
-            setTimeout(() => {
-                signaturePath.style.transition = 'stroke-dashoffset 2s ease-in-out';
-                signaturePath.style.strokeDashoffset = '0';
-            }, 2000);
-        }
-    };
-    
-    // Start initialization
-    init();
-});
-    </script>
-    
+    <script src="script.js"></script>
 </body>
 </html>
